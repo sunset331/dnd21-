@@ -1,0 +1,39 @@
+/* ═══════════════════════════════════════════════════════════
+   animations.css — Smooth, cartoon-fantasy keyframes
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1) translateY(0); }
+  35%      { transform: scale(1.04) translateY(-3px); }
+  65%      { transform: scale(1.02) translateY(-1px); }
+}
+
+@keyframes pulse-ready {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50%      { transform: scale(1.06) translateY(-4px); }
+}
+
+@keyframes spin {
+  0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  15%  { transform: rotateX(120deg) rotateY(80deg) rotateZ(15deg); }
+  45%  { transform: rotateX(400deg) rotateY(250deg) rotateZ(45deg); }
+  75%  { transform: rotateX(680deg) rotateY(420deg) rotateZ(55deg); }
+  100% { transform: rotateX(720deg) rotateY(720deg) rotateZ(72deg); }
+}
+
+@keyframes result-flash {
+  0%   { filter: drop-shadow(0 0 4px rgba(160,120,220,0.3)); }
+  30%  { filter: drop-shadow(0 0 38px rgba(255,215,0,0.85)); }
+  100% { filter: drop-shadow(0 4px 12px rgba(160,120,220,0.25)); }
+}
+
+@keyframes popup-enter {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.75); }
+  70%  { transform: translate(-50%, -50%) scale(1.04); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes popup-exit {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.85) translateY(-8px); }
+}

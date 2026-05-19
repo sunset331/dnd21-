@@ -1,0 +1,48 @@
+/* ═══════════════════════════════════════════════════════════
+   main.css — "Cartoon Fantasy Tavern" palette & fonts
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Warm fantasy palette — like a cozy tavern */
+  --color-void:            #1a1030;
+  --color-shadow:          #251845;
+  --color-amethyst-deep:   #5b3a8c;
+  --color-amethyst-mid:    #7c52b0;
+  --color-amethyst-light:  #c9a0e8;
+  --color-gold-tarnished:  #a08030;
+  --color-gold-warm:       #e0b840;
+  --color-parchment:       #f0e0c0;
+  --color-parchment-dark:  #b0a080;
+  --color-crit-fail:       #d44040;
+  --color-crit-success:    #ffd700;
+  --color-success:         #5cdb90;
+  --color-fail:            #a0b0c0;
+
+  /* Fonts — cartoon fantasy */
+  --font-display: 'MedievalSharp', Georgia, serif;
+  --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
+
+  --glow-soft:    0 0 14px rgba(160, 120, 220, 0.25);
+  --glow-strong:  0 0 24px rgba(200, 160, 60, 0.4);
+  --border-subtle: 1px solid rgba(200, 160, 60, 0.2);
+  --radius-card:  10px;
+  --radius-btn:   8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+  pointer-events: none;
+  font-family: var(--font-body);
+}
