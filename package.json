@@ -1,6 +1,6 @@
 {
   "name": "dnd-dice-pet",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "DND 21-sided dice desktop pet — a floating magical dice companion",
   "main": "main.js",
   "scripts": {
