@@ -29,6 +29,12 @@
     consecutiveCrits: 0,
     lastInteractionTime: Date.now(),
     rerollUsed: false,
+    worldState: {             // event consequence system
+      inventory: [],
+      reputation: {},
+      flags: {},
+      activeThreads: [],
+    },
   };
 
   let stage = 0;
@@ -81,7 +87,7 @@
     const lastEvent = gameState.eventHistory[gameState.eventHistory.length - 1];
     const event = (lastEvent && Math.random() < 0.30)
       ? generateChainEvent(lastEvent.event)
-      : generateEvent(Status.getAll());
+      : generateEvent(Status.getAll(), gameState.worldState);
 
     gameState.currentEvent = event;
     gameState.currentValue = null;
@@ -108,7 +114,13 @@
     gameState.currentValue = value;
     gameState.currentTier = tier;
 
-    const outcomeResult = generateOutcome(gameState.currentEvent.components, tier);
+    const storyId = gameState.currentEvent.storyId || null;
+    const outcomeResult = generateOutcome(gameState.currentEvent.components, tier, storyId);
+
+    // Apply world effects
+    if (outcomeResult.effects) {
+      applyEffects(outcomeResult.effects);
+    }
 
     // Mood
     if (tier === 'CRIT_FAIL')      { gameState.consecutiveFails++; gameState.consecutiveCrits = 0; }
@@ -160,6 +172,62 @@
   }
 
   // ═══════════════════════════════════════════════════════════
+  //  WORLD STATE EFFECTS
+  // ═══════════════════════════════════════════════════════════
+
+  function applyEffects(effects) {
+    if (!effects) return;
+    const ws = gameState.worldState;
+
+    // Add status
+    if (effects.addStatus && STATUS_POOL[effects.addStatus]) {
+      Status.add({ ...STATUS_POOL[effects.addStatus] });
+    }
+
+    // Add inventory
+    if (effects.inventory) {
+      for (const item of effects.inventory) {
+        if (!ws.inventory.includes(item)) ws.inventory.push(item);
+      }
+    }
+
+    // Set flags
+    if (effects.flags) {
+      Object.assign(ws.flags, effects.flags);
+    }
+
+    // Update reputation
+    if (effects.reputation) {
+      for (const [faction, delta] of Object.entries(effects.reputation)) {
+        ws.reputation[faction] = (ws.reputation[faction] || 0) + delta;
+      }
+    }
+
+    // Unlock chain events (max 3 layers deep to prevent infinite recursion)
+    if (effects.unlockEvents) {
+      for (const eventId of effects.unlockEvents) {
+        if (!ws.activeThreads.includes(eventId)) {
+          ws.activeThreads.push(eventId);
+        }
+      }
+      // Limit thread depth
+      if (ws.activeThreads.length > 6) {
+        ws.activeThreads = ws.activeThreads.slice(-6);
+      }
+    }
+
+    saveWorldState();
+  }
+
+  function saveWorldState() {
+    try {
+      if (window.electronAPI && window.electronAPI.mergeSettings) {
+        window.electronAPI.mergeSettings({ worldState: gameState.worldState });
+      }
+    } catch (e) { /* */ }
+  }
+
+  // ═══════════════════════════════════════════════════════════
   //  INITIALIZATION
   // ═══════════════════════════════════════════════════════════
 
@@ -205,6 +273,10 @@
   ContextMenu.init();
   Settings.init().then(() => {
     const s = Settings.getSettings();
+    // Load saved worldState
+    if (s.worldState) {
+      gameState.worldState = { ...gameState.worldState, ...s.worldState };
+    }
     Ghost.configure(s);
     Ghost.start();
     s.behavior.idleSpeech ? Mood.startIdleTimer() : Mood.stopIdleTimer();

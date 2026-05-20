@@ -224,26 +224,58 @@ function weightedPick(pool, preferredTags) {
   return pick(pool);
 }
 
-function generateEvent(activeStatuses) {
+function generateEvent(activeStatuses, worldState) {
   activeStatuses = activeStatuses || [];
-  // Map status → preferred tags
+  worldState = worldState || {};
+
+  // 30% chance: pick from unlocked chain events if any
+  if (worldState.activeThreads && worldState.activeThreads.length > 0 && Math.random() < 0.30) {
+    const storyEvent = STORY_EVENTS.find(e => e.id === pick(worldState.activeThreads));
+    if (storyEvent) {
+      return {
+        text: storyEvent.scene,
+        components: null,
+        tags: storyEvent.tags,
+        rarity: storyEvent.rarity || 'uncommon',
+        storyId: storyEvent.id,
+      };
+    }
+  }
+
+  // 30% chance: pick a random story event (has effects)
+  if (Math.random() < 0.30) {
+    const storyEvent = pick(STORY_EVENTS);
+    return {
+      text: storyEvent.scene,
+      components: null,
+      tags: storyEvent.tags,
+      rarity: storyEvent.rarity || 'uncommon',
+      storyId: storyEvent.id,
+    };
+  }
+
+  // 40%: modular composition engine
   const statusTagMap = { drunk:'tavern', goblin_smell:'goblin', dungeon_wanted:'dungeon', cursed:'curse', lucky:'treasure' };
   const preferredTags = [];
   for (const s of activeStatuses) { if (statusTagMap[s.id]) preferredTags.push(statusTagMap[s.id]); }
 
+  // Also bias by worldState reputation
+  if (worldState.reputation) {
+    for (const [faction, val] of Object.entries(worldState.reputation)) {
+      if (Math.abs(val) >= 30) preferredTags.push(faction);
+    }
+  }
+
   const action = weightedPick(ACTIONS, preferredTags);
   const location = weightedPick(LOCATIONS, preferredTags);
   const target = weightedPick(TARGETS, preferredTags);
-  // 20% chance to add a complication
   const complication = Math.random() < 0.2 ? weightedPick(COMPLICATIONS, preferredTags) : null;
 
   const text = complication
     ? `你${action.t}${location.t}${target.t}。然而——${complication.t}`
     : `你${action.t}${location.t}${target.t}。`;
 
-  // Combined tags from all components
   const allTags = [...new Set([...action.tags, ...location.tags, ...target.tags, ...(complication?complication.tags:[])])];
-  // Combined rarity: highest wins
   const rarityOrder = ['common','uncommon','rare','legendary'];
   const maxR = Math.max(...[action,location,target,complication].filter(Boolean).map(c=>rarityOrder.indexOf(c.r)));
 
@@ -255,16 +287,204 @@ function generateEvent(activeStatuses) {
   };
 }
 
-function generateOutcome(eventComponents, tier) {
+function generateOutcome(eventComponents, tier, storyId) {
+  // Story event: use its predefined outcomes
+  if (storyId) {
+    const storyEvent = STORY_EVENTS.find(e => e.id === storyId);
+    if (storyEvent) {
+      const outcome = storyEvent.outcomes[tier] || storyEvent.outcomes.FAIL;
+      return { outcome: outcome.text, tierText: tierLabel(tier), effects: outcome.effects || null };
+    }
+  }
+  // Modular composition: use template engine
   const { action, location, target, complication } = eventComponents || {};
   if (!action || !location || !target) {
-    return { outcome: '命运给出了一个模糊的回答。', tierText: tierLabel(tier) };
+    return { outcome: '命运给出了一个模糊的回答。', tierText: tierLabel(tier), effects: null };
   }
   const templates = OUTCOME_TEMPLATES[tier] || OUTCOME_TEMPLATES.FAIL;
   const tmpl = pick(templates);
   const outcomeText = tmpl(action, location, target, complication);
-  return { outcome: outcomeText, tierText: tierLabel(tier) };
+  return { outcome: outcomeText, tierText: tierLabel(tier), effects: null };
 }
+
+// ═══════════════════════════════════════════════════════════
+//  STORY EVENTS — 25 events with world consequences
+// ═══════════════════════════════════════════════════════════
+
+const STORY_EVENTS = [
+  { id:'dragon_egg_heist', rarity:'rare', tags:['dragon','stealth','danger'],
+    scene:'龙巢深处，一枚泛着微光的龙蛋正静静躺在金币堆上。母龙在洞口打盹——你只有这一次机会。',
+    outcomes:{
+      CRIT_FAIL:{ text:'龙蛋在你怀里裂开了。一只湿漉漉的幼龙探出头，第一眼看见的就是你——它发出了一声能让方圆百里所有成年龙定位的尖叫。母龙醒了。', effects:{ addStatus:'wanted_by_dragons', flags:{dragon_imprint_fail:true}, reputation:{dragons:-50, adventurers_guild:-10}, unlockEvents:['angry_dragon_mother','hunted_by_flight'] }},
+      FAIL:{ text:'你没能带走龙蛋，但母龙醒了——她在你身上喷了一道魔法标记。"我会记住你的气味，"她的眼神说。你逃出了洞穴，后背发凉。', effects:{ flags:{dragon_marked:true}, reputation:{dragons:-15}, unlockEvents:['dragon_grudge','hunter_mistakes_you'] }},
+      SUCCESS:{ text:'你抱着龙蛋在母龙醒来前溜出了洞穴。龙蛋在你怀里温暖而沉重。现在你拥有一枚龙蛋——以及随之而来的一切麻烦。', effects:{ inventory:['dragon_egg'], flags:{stole_egg:true}, reputation:{dragons:-30, black_market:20}, unlockEvents:['black_market_egg_deal','egg_hatching_event'] }},
+      CRIT_SUCCESS:{ text:'龙蛋在你手中发出一道柔和的脉冲——它认主了。母龙在洞口睁开一只眼，看着你——然后重新闭上了。她允许了。你带着这枚与你灵魂绑定的龙蛋走出洞穴，晨光照在你和它身上。', effects:{ inventory:['bonded_dragon_egg'], flags:{stole_egg:true, dragon_blessed:true}, reputation:{dragons:25, adventurers_guild:30}, unlockEvents:['hatch_a_companion','dragon_ally_quest'] }},
+    },
+  },
+  { id:'cursed_treasure_room', rarity:'uncommon', tags:['curse','treasure','dungeon'],
+    scene:'推开暗门，一间堆满金币的密室出现了。但金币上全都刻着同一个名字——不是你。角落的石碑写着："拿走一文，永世为仆。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你抓了一把金币。它们在你掌心融化成黑色的脓液，渗进了你的皮肤。现在你的右手会自己翻找别人的口袋——而且不听你的指令。', effects:{ addStatus:'cursed', flags:{cursed_hand:true}, reputation:{undead:10}, unlockEvents:['remove_hand_curse','possessed_hand_quest'] }},
+      FAIL:{ text:'你礼貌地放下了金币。密室的门在你身后关上了——然后是另一扇，然后是另一扇。你花了三个小时找到出口，出来后发现自己在一座完全陌生的城市。', effects:{ flags:{teleported_randomly:true}, unlockEvents:['lost_in_strange_city'] }},
+      SUCCESS:{ text:'你没有碰金币。但你在石碑背面发现了一行小字："有智慧的访客，请到左边第三块砖后领取真正的奖励。"你找到了一枚无害的幸运金币。', effects:{ inventory:['lucky_coin'], flags:{wise_choice:true}, reputation:{undead:5} }},
+      CRIT_SUCCESS:{ text:'你对着石碑行了个礼，然后说："我不拿你的钱。但我可以帮你找到这些金币真正的主人。"石碑裂开，里面是一枚闪着金光的徽章——"诚实者的通行证"。持有它，所有亡灵都会对你保持中立。', effects:{ inventory:['undead_truce_badge'], flags:{undead_ally:true}, reputation:{undead:40} }},
+    },
+  },
+  { id:'goblin_king_challenge', rarity:'uncommon', tags:['goblin','combat','social'],
+    scene:'哥布林王坐在用破铜烂铁搭成的"王座"上，头上歪歪扭扭的纸皇冠写着"大王"。他看见你，兴奋地拍手："来得正好！我要找一个冠军来——帮我打赢隔壁洞穴的鼠人族！他们偷了我的芝士！"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你冲进鼠人洞穴，结果发现鼠人族长老是你会说鼠人语的远房亲戚。现在你被哥布林和鼠人两边嫌弃。纸皇冠被撕成两半——一半是你的。', effects:{ addStatus:'goblin_smell', flags:{failed_diplomat:true}, reputation:{goblins:-20, ratfolk:-20}, unlockEvents:['rat_king_revenge','goblin_exile'] }},
+      FAIL:{ text:'你打了三个回合，被一块飞来的芝士砸中了脸。哥布林王觉得这是"今天看过的最好笑的战斗"，送你一顶迷你纸皇冠作为参与纪念。', effects:{ inventory:['paper_crown'], flags:{goblin_jester:true}, reputation:{goblins:5} }},
+      SUCCESS:{ text:'你用智慧和适度的暴力说服了鼠人族归还芝士。哥布林王大喜，封你为"芝士骑士"，整个哥布林部落对你打开大门。', effects:{ flags:{cheese_knight:true}, reputation:{goblins:30, ratfolk:10}, unlockEvents:['goblin_ally_call','cheese_trade_route'] }},
+      CRIT_SUCCESS:{ text:'你组织了一场哥布林-鼠人联合芝士火锅晚宴。两族和解了。哥布林王摘下纸皇冠，给你戴上："从此以后，你是我们的荣誉国王。"纸皇冠在你头上——但这次它不一样了，它微微发光。', effects:{ inventory:['enchanted_paper_crown'], flags:{goblin_king:true}, reputation:{goblins:50, ratfolk:30}, unlockEvents:['goblin_army_help','unite_the_caves'] }},
+    },
+  },
+  { id:'dwarf_masterwork_order', rarity:'uncommon', tags:['dwarf','equipment','social'],
+    scene:'矮人铁匠大师放下锤子，擦了擦汗。"我接了一个大单——为国王锻造一把剑。但我少了一块星陨石。如果你能在三天内帮我弄到，这把剑的边角料归你。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你在矿坑里挖掘时引发了小塌方——星陨石没找到，你被矮人救援队从矿坑里抬了出来。大师叹了口气："星陨石没了，我的名誉也没了。至少你还活着。"他转身回铺子时，你觉得他更老了。', effects:{ addStatus:'dungeon_wanted', flags:{failed_dwarf_order:true}, reputation:{dwarves:-10, royal_court:-5} }},
+      FAIL:{ text:'你找到了星陨石——但它是一块拳头大的小碎片，只够打一把匕首。大师勉强用它做了一把小刀，分给你。"下次努力。"', effects:{ inventory:['meteorite_dagger'], flags:{dwarf_side_job:true} }},
+      SUCCESS:{ text:'你在废弃矮人矿井的深处找到了一块拳头大的星陨石。大师用它打了一把传世名剑——剑格上刻了你的名字，剑身的边角料做了一枚戒指给你。', effects:{ inventory:['meteorite_ring'], flags:{dwarf_honor:true}, reputation:{dwarves:25, royal_court:10}, unlockEvents:['royal_knight_quest','dwarf_ally'] }},
+      CRIT_SUCCESS:{ text:'你带回的星陨石比大师想象的还大——足够打两把剑。一把给了国王，一把给了你。矮人大师在炉前流下了眼泪："我打了一辈子铁，今天是我最骄傲的一天。"你的剑被命名为"星落"，跟国王那把是姐妹武器。', effects:{ inventory:['starfall_sword'], flags:{dwarf_legend:true}, reputation:{dwarves:60, royal_court:40}, unlockEvents:['king_calls_for_help','dwarf_legend_spreads'] }},
+    },
+  },
+  { id:'dark_elf_smuggler', rarity:'rare', tags:['dark_elf','crime','stealth'],
+    scene:'暗巷里，一个银发的暗精灵靠在墙上。她手里把玩着一枚发光的黑珍珠。"你看起来像是一个需要好东西的人。我这儿有香料、毒药、情报——你要哪样？"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你买了一份"情报"——结果是她编的。你按情报摸进的地方是暗精灵刺客公会的总部。你被二十把淬毒匕首同时指着。她后来看到你被扔出来时，在旁边笑得直不起腰。', effects:{ addStatus:'dungeon_wanted', flags:{dark_elf_prank:true}, reputation:{dark_elves:-15}, unlockEvents:['dark_elf_assassin_hunt'] }},
+      FAIL:{ text:'你买了一瓶"高级香料"——打开后房间里全是洋葱味，熏得你眼泪直流。暗精灵已经不见了。你觉得她此刻正在某个地方用你那几枚金币买了真香料，笑得非常开心。', effects:{ flags:{scammed_by_dark_elf:true}, reputation:{dark_elves:5} }},
+      SUCCESS:{ text:'你买了一小袋"夜行者粉末"——在黑暗中抛洒可以标记周围所有隐形生物的位置。暗精灵对你点了点头："下次再来。你比大多数人聪明。"', effects:{ inventory:['nightwalker_dust'], flags:{dark_elf_contact:true}, reputation:{dark_elves:15}, unlockEvents:['dark_elf_trade_route','invisible_stalker_quest'] }},
+      CRIT_SUCCESS:{ text:'你没买东西。你请她喝了一杯，听她讲暗精灵地下城的故事。天亮时她把黑珍珠推到你面前。"这个送你。它吸了三个世纪的月光，可以——算了，你以后会知道的。"', effects:{ inventory:['moonlight_pearl'], flags:{dark_elf_friend:true}, reputation:{dark_elves:35}, unlockEvents:['dark_elf_alliance','moonlight_ritual'] }},
+    },
+  },
+  { id:'legendary_ghost_ship', rarity:'legendary', tags:['undead','legendary','weather'],
+    scene:'暴风雨夜，一艘半透明的幽灵船搁浅在海岸上。甲板上站着一个独臂的幽灵船长，他看见你，用低沉的声音说："三百年了——终于有人能看见我。年轻人，我需要你的帮助。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你上船帮忙，但踩到了一块腐烂的甲板——你从幽灵船的船底穿了过去。你被海水冲上了岸，浑身是沙。幽灵船长在甲板上看着你："也许...你可以先练练怎么走路。"', effects:{ flags:{ghost_ship_fail:true}, reputation:{undead:5}, unlockEvents:['ghost_captain_try_again'] }},
+      FAIL:{ text:'你没帮上什么忙。但船长没有怪你——"能看见我已经很不容易了。"他给了你一枚潮湿的银币，上面刻着他生前的头像。看起来不太值钱，但在月光下会自己发光。', effects:{ inventory:['ghost_silver_coin'], flags:{met_ghost_captain:true}, reputation:{undead:5} }},
+      SUCCESS:{ text:'你帮船长清理了甲板上的诅咒藤蔓。船终于可以从浅滩上重新浮起来。他给了你一顶旧船长帽——"戴上它，你可以在任何水域不迷路。"', effects:{ inventory:['captain_hat'], flags:{ghost_captain_ally:true}, reputation:{undead:20}, unlockEvents:['sunken_treasure_map','undead_port_access'] }},
+      CRIT_SUCCESS:{ text:'你帮船长解开了他三百年的诅咒——原来他一直在等有人对他说"船员已就位"。你说出了这句话。幽灵船升入夜空，化作无数星点。甲板上只留下一个古老的指南针，永远指向回家的方向。', effects:{ inventory:['ghost_compass'], flags:{freed_ghost_captain:true}, reputation:{undead:70}, unlockEvents:['ghost_fleet_quest','undead_king_thanks'] }},
+    },
+  },
+  { id:'orc_honor_duel', rarity:'uncommon', tags:['orc','combat','honor'],
+    scene:'半兽人酋长把你堵在竞技场的入口。他比你高两个头，但嗓音异常温和："小个子，我听说你很能打。我挑战你——不是仇恨，是荣誉。赢了我，我的战帮尊重你。输了——你也一样得到一个朋友。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'他第一拳就把你打飞到了场边的泥坑里。但他说到做到——输了你也得到朋友。他把你从泥坑里捞出来，拍了拍你的肩，差点把你又拍进坑里。"下次再来！你的拳头有精神。"', effects:{ flags:{orc_friend:true}, reputation:{orcs:10}, unlockEvents:['orc_training_montage'] }},
+      FAIL:{ text:'你坚持了三个回合。酋长收了拳，哈哈大笑——"你是我见过最难打的小个子。"他把自己的旧拳套给了你。破旧但厚实，每一个裂纹都有故事。', effects:{ inventory:['orcs_old_gauntlets'], flags:{orc_sparring_partner:true}, reputation:{orcs:15} }},
+      SUCCESS:{ text:'你巧妙地躲过了他的猛击，用速度和技巧打了个平手。酋长脱下手套，握住了你的手："你打得像一个真正的战士。"战帮的兽人集体捶地表示敬意。', effects:{ flags:{orc_honor_win:true}, reputation:{orcs:35}, unlockEvents:['orc_warband_quest','orc_armor_gift'] }},
+      CRIT_SUCCESS:{ text:'你赢了——不是靠蛮力，而是用一次完美的关节技让酋长自己认了输。他愣了两秒，然后爆发出震天的笑声："好！太好了！"他摘下了自己的项链——一枚巨狼牙——挂在你脖子上。"以后你是我的血盟兄弟。"', effects:{ inventory:['direwolf_fang_necklace'], flags:{orc_blood_brother:true}, reputation:{orcs:60}, unlockEvents:['orc_army_ally','direwolf_mount_quest'] }},
+    },
+  },
+  { id:'weather_oracle_shrine', rarity:'uncommon', tags:['weather','magic','travel'],
+    scene:'山顶上，一座风化的神龛矗立在雷云之下。神龛上刻着字："问天气者，得天气。——风神。"神龛的祭坛上有一个空的铜碗——似乎在等祭品。',
+    outcomes:{
+      CRIT_FAIL:{ text:'你往铜碗里吐了口唾沫表示不屑。天空降下一道微型闪电——不大，刚好把鞋底烧焦。现在你走路时有清脆的啪啪声，方圆百米内的人都能听见。风神有幽默感，但你不太喜欢。', effects:{ flags:{weather_god_prank:true}, unlockEvents:['appease_wind_god'] }},
+      FAIL:{ text:'你丢了一枚铜板进去。天边飘来一朵不太大的乌云，在你头上定点下了一刻钟的小雨。你觉得风神在用实际行动告诉你：铜板只值铜板的雨。', effects:{ flags:{weather_cheapskate:true} }},
+      SUCCESS:{ text:'你放了一枚银币。天空放晴了一整天——恰好够你翻过前面那道最难的山脊。风在背后推着你。你在日落时到达了山脚，银币花得值。', effects:{ inventory:['fair_weather_charm'], flags:{wind_god_pleased:true}, unlockEvents:['wind_temple_secret'] }},
+      CRIT_SUCCESS:{ text:'你放了一枚金币——你身上唯一的一枚。天空沉默了片刻，然后一道柔软的暖风围住了你。风神给了你一个持续一周的buff：和你同行的所有队友都享受顺风。一行路过的商队不敢相信他们的好运，集体给你鞠了一躬。', effects:{ inventory:['wind_god_blessing'], flags:{wind_god_ally:true}, reputation:{merchants:25}, unlockEvents:['storm_quest','fly_with_wind'] }},
+    },
+  },
+  { id:'bardic_roast_battle', rarity:'uncommon', tags:['tavern','bard','social'],
+    scene:'酒馆里，两个吟游诗人正在用歌词互相嘲讽。观众们围成一圈，笑得前仰后合。其中一个诗人看见你，递给你一把鲁特琴："轮到你了，冒险者！你敢上来跟我比一比嘴皮子吗？"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你接过了琴——但你只会三个和弦。你唱了一段，押韵失败，节奏跑偏。酒馆安静了下来，不是因为感动——是因为尴尬。一个老矮人拍了拍你："下次还是打架吧。"', effects:{ flags:{bardic_embarrassment:true}, reputation:{bards:-5, tavern_regulars:-5} }},
+      FAIL:{ text:'你勉强唱了一首，虽然普普通通，但你的勇气得到了观众的礼貌性掌声。主持吟游诗人给了你一张乐谱作为鼓励："练好这首曲子，下次再来。"', effects:{ inventory:['practice_sheet_music'], flags:{bardic_attempt:true} }},
+      SUCCESS:{ text:'你的歌词犀利又风趣，观众们沸腾了。对手认输后请你喝了一杯——"你是第一个能跟上节奏的冒险者。"他留了一张名片给你，说吟游诗人公会随时欢迎你。', effects:{ flags:{bardic_respect:true}, reputation:{bards:20, tavern_regulars:15}, unlockEvents:['bard_guild_invite','tavern_opening_act'] }},
+      CRIT_SUCCESS:{ text:'你即兴创作了一段史诗说唱，把在场所有人名都押了进去，连那个全程板着脸的兽人守卫都破功笑了。这段被录入了本年度的"酒馆最佳现场"合集。你被授予了"民间传说级段子手"的称号。', effects:{ inventory:['golden_lute_pick'], flags:{bardic_legend:true}, reputation:{bards:50, tavern_regulars:40}, unlockEvents:['royal_court_performance','bardic_hall_of_fame'] }},
+    },
+  },
+  { id:'mimic_confusion', rarity:'uncommon', tags:['dungeon','comedy','danger'],
+    scene:'你面前有一张桌子，上面放着一杯还冒着热气的茶。但旁边没有椅子，没有杯子，也没有人。茶自己冒着热气。你凑近——茶杯突然开口说话了："看什么看？没见过杯子喝茶？"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你伸手去碰杯子——桌子也活了过来。桌子和杯子是一对拟态魔物夫妇，它们觉得你"很没礼貌"。你被桌子和杯子追了三条走廊。', effects:{ flags:{mimic_couple_enemy:true}, unlockEvents:['mimic_revenge','mimic_house_hunt'] }},
+      FAIL:{ text:'你礼貌地后退。杯子哼了一声："算你识相。"然后继续喝它的茶。你赶紧离开，却发现你的水袋被换了——里面现在是那杯茶。味道还行。', effects:{ inventory:['mystery_tea'], flags:{mimic_tea:true} }},
+      SUCCESS:{ text:'你跟它们聊了半小时，发现这对拟态魔物夫妻正在为找不到合适的住所发愁。你推荐了附近的一个空置地牢——它们给你留了一个暗号，说以后在别的城堡里遇到拟态魔物可以报它们名字。', effects:{ flags:{mimic_friend:true}, reputation:{mimics:25}, unlockEvents:['mimic_house_warming','mimic_guardian'] }},
+      CRIT_SUCCESS:{ text:'你帮它们找到了一个空置的地下室——里面还有一套完整的旧家具（不会说话的那种）。它们感动得当场变化成了超级舒适的沙发组合。临走时它们给了你一枚"拟态魔物友好徽章"——带着它，你遇到的拟态魔物都不会攻击你。', effects:{ inventory:['mimic_friend_badge'], flags:{mimic_ally:true}, reputation:{mimics:50} }},
+    },
+  },
+  // 10 more chain events (unlocked by previous events)
+  { id:'angry_dragon_mother', rarity:'rare', tags:['dragon','danger','weather'],
+    scene:'天空突然暗了下来——一头巨大的母龙降落在你面前，方圆百米的地面都在颤抖。她的眼睛锁定了你，瞳孔中倒映着你抱走龙蛋的那个瞬间。',
+    outcomes:{
+      CRIT_FAIL:{ text:'母龙在你身上留下了一道永久性的龙痕——任何龙族都能认出你。从此你只要靠近有龙出没的地方，就会被集体围观。你的通缉令在龙族内部流传。', effects:{ addStatus:'dungeon_wanted', flags:{dragon_fugitive:true}, reputation:{dragons:-80}, unlockEvents:['dragon_hunt_squad'] }},
+      FAIL:{ text:'母龙用龙语对你下了一道令：你必须在三个月内献上一件等值的宝物作为赔偿。她还给了你一份"龙族赔偿条款"——一张羊皮卷，上面用烧焦的爪印列出了清单。', effects:{ flags:{dragon_debt:true}, reputation:{dragons:-20}, unlockEvents:['dragon_treasure_quest'] }},
+      SUCCESS:{ text:'你坦诚地解释了——蛋不是偷来的，是它自己选择跟你走的。母龙沉默了。然后她低头近距离看了你很久，最后轻声说："如果我的孩子信你，那我也信你。但保护它，否则你知道后果。"', effects:{ flags:{dragon_trust:true}, reputation:{dragons:30}, unlockEvents:['dragon_protector_quest'] }},
+      CRIT_SUCCESS:{ text:'母龙没有惩罚你。相反，她给了你一枚她的鳞片——不是警告，而是保护。"拿着它，整个龙族都知道你是我孩子的守护者。"她说。然后展翅飞走了，风把她的低语留在你耳边："我很高兴它选了你。"', effects:{ inventory:['mother_dragon_scale'], flags:{dragon_protector:true}, reputation:{dragons:60} }},
+    },
+  },
+  { id:'egg_hatching_event', rarity:'rare', tags:['dragon','magic','companion'],
+    scene:'龙蛋在你背包里开始轻轻震动。裂缝出现了——一条小小的光从蛋壳里透出来。',
+    outcomes:{
+      CRIT_FAIL:{ text:'幼龙出来了——但它的第一口龙息把你背包里所有东西都熏黑了。包括你的午餐。它打了个嗝，看起来挺开心的。你不太开心。', effects:{ inventory:['baby_dragon'], flags:{hatching_mess:true}, addStatus:'goblin_smell' }},
+      FAIL:{ text:'蛋裂开了，但幼龙似乎不太想出来。它探出半个脑袋看了看你，又缩回去了。你现在有一个半孵化的龙蛋和一个社恐的幼龙。路还很长。', effects:{ inventory:['shy_baby_dragon_egg'], flags:{slow_hatching:true} }},
+      SUCCESS:{ text:'一只银灰色的小龙从蛋壳里站了起来，抖了抖翅膀。它歪着脑袋看了你三秒，然后爬到了你的肩膀上，用尾巴卷住了你的脖子。你有了一个同伴。', effects:{ inventory:['baby_dragon'], flags:{dragon_companion:true}, reputation:{dragons:20}, unlockEvents:['raise_a_dragon','dragon_trainer_fame'] }},
+      CRIT_SUCCESS:{ text:'幼龙破壳的瞬间，一道虹光冲天而起。方圆数里的商人都看见了那道光芒。小东西抬头对你叫了一声，不是龙啸——是一种类似猫咪撒娇的声音。你知道它会长成一头伟大的龙，而你是它最初的全部世界。', effects:{ inventory:['bonded_baby_dragon'], flags:{dragon_companion_legend:true}, reputation:{dragons:50, merchants:20} }},
+    },
+  },
+  { id:'black_market_egg_deal', rarity:'uncommon', tags:['crime','treasure','social'],
+    scene:'一个戴满戒指的胖商人在地下酒馆等你。他的小眼睛在龙蛋上来回扫："这可是真货。开个价吧，冒险者——我这辈子没经手过这么值钱的东西。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你开价太高。商人怒了——他认为你是在耍他。他派了两个打手跟着你出去"谈谈"。你损失了五十金币外加一份自尊。', effects:{ flags:{black_market_enemy:true}, reputation:{black_market:-20} }},
+      FAIL:{ text:'你犹豫太久。商人失去了兴趣，挥了挥手让你出去。但他给了你一张名片——"下次有东西先来找我。"也许以后还有机会。', effects:{ flags:{black_market_contact:true}, reputation:{black_market:5} }},
+      SUCCESS:{ text:'你以一笔丰厚的价格卖掉了龙蛋。胖商人笑得合不拢嘴，额外给了你一块通行令牌——有了它，各地的黑市都对你开放。', effects:{ inventory:['black_market_pass'], flags:{sold_egg:true}, reputation:{black_market:30}, unlockEvents:['black_market_vip','rare_item_auction'] }},
+      CRIT_SUCCESS:{ text:'你没有卖——你临时改变了主意。商人看到你的犹豫，反而更尊敬你："不贪心的人现在越来越少了。"他给了你一枚黑市特殊通行证作为礼物，说以后你有什么需要都可以找他。他握着你的手时，你感觉到他少了两根手指——这背后有一个故事。', effects:{ inventory:['black_market_vip_pass'], flags:{kept_egg:true, black_market_respect:true}, reputation:{black_market:40} }},
+    },
+  },
+  { id:'hunted_by_flight', rarity:'rare', tags:['dragon','danger','travel'],
+    scene:'远方天际出现了一排黑点。一开始你以为那是鸟——直到它们以惊人的速度变大，你看到了翅膀、利爪、还有龙背上全副武装的龙骑士。他们是来追你的。',
+    outcomes:{
+      CRIT_FAIL:{ text:'龙骑巡逻队在你的临时营地上空盘旋了整整六圈，每一圈都在你的头顶投下阴影。你躲在一个石缝里不敢动，直到天黑。他们飞走了——但在你的营地留下了龙类追踪标记，方圆百里的龙都能闻到。', effects:{ addStatus:'dungeon_wanted', flags:{tracked_by_riders:true}, reputation:{dragons:-40} }},
+      FAIL:{ text:'你狼狈地躲进了一个洞穴。龙骑队的队长在洞口喊了一句话，然后他们飞走了。你没听清那句话，但你觉得肯定不是什么好话。', effects:{ flags:{rider_note:true}, reputation:{dragons:-10} }},
+      SUCCESS:{ text:'你提前发现了巡逻队，及时隐藏了行踪。他们从你头顶飞过，没有任何察觉。你还学到了龙骑的巡逻路线——以后可以避开。', effects:{ flags:{evaded_riders:true}, unlockEvents:['dragon_rider_intel'] }},
+      CRIT_SUCCESS:{ text:'你没躲。你站了出来，举起双手，然后做了一个标准龙骑敬礼——你在冒险者手册上学到过。巡逻队长降落了。他看着你："你很有勇气。我们接到的命令是追捕你，但命令上没有说不能先请你喝一杯。"一杯酒之后，他说他会报"目标未找到"。', effects:{ flags:{rider_respect:true}, reputation:{dragons:20}, unlockEvents:['dragon_rider_ally','dragon_city_access'] }},
+    },
+  },
+  { id:'rat_king_revenge', rarity:'uncommon', tags:['dungeon','combat','comedy'],
+    scene:'夜深了，你的营地周围传来细碎的脚步声——不是一只，是几百只。领头的一只巨大的白鼠坐在由乐高积木搭成的"战车"上，被一群老鼠拉着。它指着你吱吱了两声，翻译过来大概是："就是他。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'老鼠们偷走了你背包里所有发光的物件——金币、戒指、甚至你背包拉链上的金属扣。第二天你在四十米外的树洞里找到了半包干粮，还有一枚老鼠留下的"收据"（一块被啃过的树皮）。', effects:{ flags:{robbed_by_rats:true}, reputation:{ratfolk:-10} }},
+      FAIL:{ text:'你扔了几块奶酪给它们。谈判失败——它们吃了奶酪，但还是偷走了你一只袜子。也许下次带更好的奶酪。', effects:{ flags:{rat_truce_attempt:true} }},
+      SUCCESS:{ text:'你坐下开了个会。鼠王原来是"芝士骑士"事件的粉丝，它表示愿意跟你合作——只要以后每年交十块好芝士给鼠人部落。你签了——不对，你咬了——一份鼠皮合同（字面上）。', effects:{ flags:{rat_ally:true}, reputation:{ratfolk:25}, unlockEvents:['rat_spy_network','cheese_trade_route'] }},
+      CRIT_SUCCESS:{ text:'你没有打架。你掏出了你包里最后一盒芝士火锅底料——上次哥布林晚宴剩的。鼠王闻了闻，眼睛发出了光。从那天起，你有了一个鼠人情报网——在任何一个城市的老鼠洞里，都有一只老鼠认识你。', effects:{ inventory:['rat_king_whistle'], flags:{rat_network:true}, reputation:{ratfolk:50} }},
+    },
+  },
+  { id:'royal_knight_quest', rarity:'uncommon', tags:['noble','combat','honor'],
+    scene:'一个骑白马的皇家传令官来到你面前，展开一卷羊皮卷："国王陛下听说了你的事迹，邀请你参加今年的皇家骑士选拔赛。如果你获胜，将被授予骑士头衔和封地。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你在第一轮就被刷下来了——不是因为你不够格，是因为你的对手用了一把涂了蒙汗药的剑。你醒来时已经在场外了，旁边放了一张小字条："下次别用普通抗毒药剂。——你的对手。"', effects:{ flags:{tournament_cheated:true}, reputation:{royal_court:-10}, unlockEvents:['find_cheater'] }},
+      FAIL:{ text:'你没能进入决赛，但你得了"最佳风格奖"——因为你的装备搭配被裁判团公认为"最有个性"。奖品是一面小盾牌，上面刻着"风格不是一切"。', effects:{ inventory:['style_shield'], flags:{tournament_style:true}, reputation:{royal_court:5} }},
+      SUCCESS:{ text:'你一路过关斩将打进决赛，最终获得亚军。国王亲自给你挂上了一枚银质勋章，并说"明年再来"。封地没有——但一个骑士导师看上了你，愿意免费训练你。', effects:{ flags:{tournament_silver:true}, reputation:{royal_court:25}, unlockEvents:['knight_training','border_defense'] }},
+      CRIT_SUCCESS:{ text:'你赢了。决赛上你在马上使出了一套从未有人见过的剑法——那套剑法来自你所有的冒险经历。国王站起来为你鼓掌。你被授予了骑士头衔、一片封地、还有一匹你亲自挑选的白马。册封仪式上你说："我只是一直在做正确的事。"', effects:{ inventory:['knight_title_deed'], flags:{royal_knight:true}, reputation:{royal_court:60, dwarves:10, orcs:10} }},
+    },
+  },
+  { id:'dark_elf_alliance', rarity:'rare', tags:['dark_elf','social','magic'],
+    scene:'暗精灵地下城的长老议会正在开会。你被带到了大厅中央——十二位银发长老围坐在发光的蘑菇圈里。首席长老开口："我们听说了你的珍珠。那是我们的圣物。你愿意把它还给我们吗？条件你可以提。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你拒绝归还。长老们叹息，对你下了一道驱逐令——从此你在暗精灵领地不受欢迎，所有暗精灵商人都不会跟你交易。', effects:{ flags:{dark_elf_exiled:true}, reputation:{dark_elves:-40} }},
+      FAIL:{ text:'你要求等价交换。长老给了你一堆金币——不多不少，恰好是你需要的量。珍珠回到了它原来的位置，暗精灵们对你点了点头。交易完成，各取所需。', effects:{ flags:{dark_elf_transaction:true} }},
+      SUCCESS:{ text:'你还了珍珠——但提出用它作为交换条件，请暗精灵为你开一门"夜行者训练"课程。长老们同意了。七天后你学会了如何在完全黑暗中视物——每分钟只能持续三十秒，但已经足以改变很多战斗的走向。', effects:{ inventory:['darkvision_skill'], flags:{dark_elf_student:true}, reputation:{dark_elves:30}, unlockEvents:['dark_elf_artifact_hunt'] }},
+      CRIT_SUCCESS:{ text:'你双手捧着珍珠走向祭坛。珍珠滑入凹槽时，整个地下城都被月光点亮——虽然是白天。长老们全体起立，首席长老流泪了："这颗珍珠带走了暗精灵三世纪的黑暗。你给了我们月光。"你被授予"月光使者"的称号和一枚暗精灵权杖——暗精灵会在你需要时来援助你。', effects:{ inventory:['dark_elf_scepter'], flags:{dark_elf_hero:true}, reputation:{dark_elves:80} }},
+    },
+  },
+  { id:'remove_hand_curse', rarity:'uncommon', tags:['curse','magic','quest'],
+    scene:'你找到了那个据说能解诅咒的老法师。他住在沼泽里的一座歪塔里，塔身斜得你怀疑随时会倒。老法师看了看你的右手："这个诅咒有年头了。解不难——但你需要帮我去采一味药引。"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你采回的药引是假的——沼泽里有一种长得很像的毒蘑菇。老法师差点赔上自己的胡子。他用水泼了你一身作为惩罚——但水有点热，还有泡泡。"下次看清楚再摘！"' , effects:{ flags:{wrong_ingredient:true}, unlockEvents:['try_cure_again'] }},
+      FAIL:{ text:'你采的药引对了——但量不够。诅咒减轻了：你的右手现在每隔一个钟头才偷一次东西，以前是每十分钟。老法师说这叫"阶段性成果"。', effects:{ flags:{curse_weakened:true} }},
+      SUCCESS:{ text:'药引采对了。老法师熬了一锅冒着彩虹色泡沫的汤药，你把右手泡了进去。诅咒解了。你的手又属于你了。老法师还在你手背上画了一个护符："防复发。保修一年。"', effects:{ flags:{curse_cured:true}, reputation:{wizards:10} }},
+      CRIT_SUCCESS:{ text:'你不只采到了药引——你还发现了一种稀有草药。老法师激动得把他珍藏的《初级诅咒防护手册》送给了你。是旧的，书角都被他翻烂了，但这是他五十年的心血。' , effects:{ inventory:['curse_protection_manual'], flags:{curse_cured:true, wizard_apprentice:true}, reputation:{wizards:30}, unlockEvents:['apprentice_quest','help_cursed_victims'] }},
+    },
+  },
+  { id:'dragon_rider_ally', rarity:'rare', tags:['dragon','travel','combat'],
+    scene:'天空中出现了一头熟悉的龙——那名请过你喝酒的龙骑士。他降落在你旁边，向你伸出了手："我需要一个帮手。有个村子被山贼围困了。一个人的龙不够用——你愿意跟我一起飞吗？"',
+    outcomes:{
+      CRIT_FAIL:{ text:'你害怕了。在龙背上你全程闭眼，下来时腿抖得站不稳。龙骑士忍住笑——忍得不够成功。"下次...也许骑马更好。"', effects:{ flags:{afraid_of_flight:true} }},
+      FAIL:{ text:'你尽力了——但山贼太多了。你们救了一半的村子。另一半村民在感谢你的同时也在哭。龙骑士给了你一瓶龙息药剂作为答谢："下次我们会有更多的人。"', effects:{ inventory:['dragon_breath_potion'], flags:{half_saved_village:true} }},
+      SUCCESS:{ text:'你俩配合默契，把山贼打得落花流水。村民拿出了藏了一百年的老酒感谢你们。在篝火旁，龙骑士脱下手套："你骑得不错。以后需要空中支援就叫我。"他给了你一个龙笛。', effects:{ inventory:['dragon_flute'], flags:{rider_brother:true}, reputation:{dragons:20, villagers:30} }},
+      CRIT_SUCCESS:{ text:'你在救援中救出了山贼头目关在地窖里的百姓——整整十五个人。龙骑士的龙在你旁边降落，所有人被送到了安全地带。你的名字在这个地区被自动写入了当地的英雄录。龙骑士立誓在你有需要时永远会来。', effects:{ inventory:['rider_oath_badge'], flags:{hero_of_village:true}, reputation:{dragons:40, villagers:80} }},
+    },
+  },
+];
 
 // ═══════════════════════════════════════════════════════════
 //  EVENT CHAIN
@@ -304,4 +524,4 @@ function pickRandomStatus(){
 }
 
 // ─── Exports ───
-if(typeof module!=='undefined'&&module.exports){module.exports={classifyTier,tierLabel,tierEmoji,generateEvent,generateOutcome,pickRandomStatus,STATUS_POOL,generateChainEvent,ACTIONS,LOCATIONS,TARGETS,COMPLICATIONS};}
+if(typeof module!=='undefined'&&module.exports){module.exports={classifyTier,tierLabel,tierEmoji,generateEvent,generateOutcome,pickRandomStatus,STATUS_POOL,generateChainEvent,STORY_EVENTS,ACTIONS,LOCATIONS,TARGETS,COMPLICATIONS};}
