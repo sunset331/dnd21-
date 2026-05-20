@@ -3,7 +3,7 @@
 > 一颗有生命的魔法骰子，悬浮在你的桌面上。掷出命运，改变世界。
 
 <p align="center">
-  <img src="https://img.shields.io/badge/版本-1.1.0-8e44ad?style=flat-square" alt="version">
+  <img src="https://img.shields.io/badge/版本-1.1.1-8e44ad?style=flat-square" alt="version">
   <img src="https://img.shields.io/badge/平台-Windows-blue?style=flat-square" alt="platform">
   <img src="https://img.shields.io/badge/引擎-Electron-9b59b6?style=flat-square" alt="engine">
   <img src="https://img.shields.io/badge/风格-暗黑奇幻酒馆-8e44ad?style=flat-square" alt="style">
@@ -81,6 +81,14 @@
 
 13 个搞怪成就：从"欢迎来到地牢"到"天选之人"，分 common / uncommon / rare 三档稀有度。
 
+### 🎨 主题系统（v1.1.1 新增）
+
+6 个预设主题一键切换：魔法紫 / 哥布林绿 / 龙焰橙 / 深海蓝 / 血月红 / 羊皮纸。每个主题可在设置面板中微调 5 种关键颜色，实时预览无需重启。调"主文字"颜色时，场景旁白自动跟随变暗。
+
+### 🖥️ DPI 适配（v1.1.1 新增）
+
+窗口自动感知 Windows 显示缩放（100%/125%/150%/200%），面板使用 `clamp()` 响应式布局防止溢出，所有弹窗有 `max-height: 90vh` 保护。
+
 ### 👻 幽灵模式
 
 闲置 15 秒后骰子自动半透明化。鼠标靠近恢复——像漂浮的魔法遗物。
@@ -119,7 +127,7 @@
 
 ### 方式一：便携版（推荐）
 
-下载 `DND-Dice-Pet-v1.1.0.zip`，解压后双击 `DND Dice Pet.exe`。
+下载 `DND-Dice-Pet-v1.1.1.zip`，解压后双击 `DND Dice Pet.exe`。
 
 ### 方式二：从源码运行
 
@@ -183,7 +191,8 @@ dnd-dice-pet/
 
 | 版本 | 内容 |
 |------|------|
-| **v1.1.0** | 世界状态系统、25个故事事件、事件链、背包/声望/标记、effects持久化 |
+| **v1.1.1** | 主题系统（6预设+5自定义颜色+实时预览）、DPI适配（100%-200%缩放）、面板响应式布局 |
+| v1.1.0 | 世界状态系统、25个故事事件、事件链、背包/声望/标记、effects持久化 |
 | v1.0.0 | 三阶段交互、模块化事件引擎、情绪系统、幽灵模式、成就、托盘、右键菜单 |
 
 ---
