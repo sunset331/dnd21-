@@ -16,7 +16,10 @@
   transform: translate(-50%, -50%);
   z-index: 200; pointer-events: auto;
   padding: 14px 18px 10px;
-  min-width: 200px; max-width: 230px;
+  min-width: clamp(180px, 28vw, 230px);
+  max-width: min(92vw, 260px);
+  max-height: 90vh;
+  overflow-y: auto;
   animation: settings-enter 0.2s ease-out;
 }
 @keyframes settings-enter {
@@ -67,7 +70,7 @@
 
 /* ─── Achievement list (in settings) ─── */
 .ach-list {
-  max-height: 120px; overflow-y: auto; margin-top: 4px;
+  max-height: min(50vh, 180px); overflow-y: auto; margin-top: 4px;
 }
 .ach-list::-webkit-scrollbar { width: 3px; }
 .ach-list::-webkit-scrollbar-thumb { background: rgba(200,160,60,0.15); border-radius: 2px; }
@@ -118,7 +121,9 @@
   z-index: 200; pointer-events: auto;
 }
 .log-panel-card {
-  padding: 10px 12px; width: 220px; max-height: 280px;
+  padding: 10px 12px;
+  width: clamp(200px, 32vw, 280px);
+  max-height: min(85vh, 350px);
   display: flex; flex-direction: column;
 }
 .log-panel-header {
@@ -132,7 +137,7 @@
   border-radius: 4px; color: var(--color-parchment);
   font-family: var(--font-body); margin-bottom: 4px; outline: none;
 }
-.log-panel-list { flex: 1; overflow-y: auto; max-height: 200px; }
+.log-panel-list { flex: 1; overflow-y: auto; max-height: min(60vh, 250px); }
 .log-panel-list::-webkit-scrollbar { width: 3px; }
 .log-panel-list::-webkit-scrollbar-thumb { background: rgba(200,160,60,0.15); border-radius: 2px; }
 .log-entry-item { padding: 4px 3px; border-bottom: 1px solid rgba(255,255,255,0.04); }
@@ -164,3 +169,25 @@
 }
 .log-clear-btn:hover { border-color: rgba(212,64,64,0.5); color: rgba(255,255,255,0.5); }
 .log-empty { text-align: center; color: rgba(255,255,255,0.1); font-family: var(--font-display); font-size: 10px; padding: 20px 0; }
+
+/* ─── Theme controls ─── */
+.theme-select {
+  background: rgba(0,0,0,0.3); border: 1px solid rgba(200,160,60,0.2);
+  border-radius: 4px; color: var(--color-parchment);
+  font-family: var(--font-body); font-size: 10px;
+  padding: 2px 6px; cursor: pointer; outline: none;
+}
+.theme-select option { background: #1a1030; color: #f0e0c0; }
+.color-input {
+  width: 28px; height: 20px; border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px; cursor: pointer; padding: 0; background: none;
+}
+.color-input::-webkit-color-swatch-wrapper { padding: 0; }
+.color-input::-webkit-color-swatch { border: none; border-radius: 2px; }
+.settings-reset-btn {
+  display: block; width: 100%; margin-top: 6px; padding: 4px;
+  background: none; border: 1px solid rgba(200,160,60,0.15);
+  border-radius: 4px; color: rgba(255,255,255,0.25);
+  font-family: var(--font-body); font-size: 9px; cursor: pointer;
+}
+.settings-reset-btn:hover { border-color: rgba(200,160,60,0.4); color: rgba(255,255,255,0.6); }

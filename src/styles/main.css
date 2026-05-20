@@ -1,9 +1,9 @@
 /* ═══════════════════════════════════════════════════════════
-   main.css — "Cartoon Fantasy Tavern" palette & fonts
+   main.css — Theme system with 6 presets + custom override
    ═══════════════════════════════════════════════════════════ */
 
-:root {
-  /* Warm fantasy palette — like a cozy tavern */
+/* ─── Default: Magic Purple (魔法紫) ─── */
+:root, [data-theme="purple"] {
   --color-void:            #1a1030;
   --color-shadow:          #251845;
   --color-amethyst-deep:   #5b3a8c;
@@ -17,11 +17,8 @@
   --color-crit-success:    #ffd700;
   --color-success:         #5cdb90;
   --color-fail:            #a0b0c0;
-
-  /* Fonts — cartoon fantasy */
   --font-display: 'MedievalSharp', Georgia, serif;
   --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
-
   --glow-soft:    0 0 14px rgba(160, 120, 220, 0.25);
   --glow-strong:  0 0 24px rgba(200, 160, 60, 0.4);
   --border-subtle: 1px solid rgba(200, 160, 60, 0.2);
@@ -29,20 +26,113 @@
   --radius-btn:   8px;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ─── Goblin Green (哥布林绿) ─── */
+[data-theme="goblin"] {
+  --color-void:            #142018;
+  --color-shadow:          #1e3028;
+  --color-amethyst-deep:   #3d6b3d;
+  --color-amethyst-mid:    #5a9a4a;
+  --color-amethyst-light:  #a0e0a0;
+  --color-gold-tarnished:  #808030;
+  --color-gold-warm:       #b0d040;
+  --color-parchment:       #e0f0c0;
+  --color-parchment-dark:  #90a870;
+  --color-crit-fail:       #d45030;
+  --color-crit-success:    #80ff40;
+  --color-success:         #40d060;
+  --color-fail:            #809070;
+  --glow-soft:    0 0 14px rgba(90, 180, 90, 0.3);
+  --glow-strong:  0 0 24px rgba(140, 220, 60, 0.4);
+  --border-subtle: 1px solid rgba(160, 200, 80, 0.2);
 }
 
+/* ─── Dragon Fire (龙焰橙) ─── */
+[data-theme="dragonfire"] {
+  --color-void:            #201510;
+  --color-shadow:          #302018;
+  --color-amethyst-deep:   #8c4a20;
+  --color-amethyst-mid:    #c06030;
+  --color-amethyst-light:  #f0a060;
+  --color-gold-tarnished:  #a06020;
+  --color-gold-warm:       #f0a030;
+  --color-parchment:       #ffe8d0;
+  --color-parchment-dark:  #c09870;
+  --color-crit-fail:       #e04020;
+  --color-crit-success:    #ffb030;
+  --color-success:         #f09040;
+  --color-fail:            #b09070;
+  --glow-soft:    0 0 14px rgba(240, 140, 60, 0.3);
+  --glow-strong:  0 0 24px rgba(255, 160, 40, 0.5);
+  --border-subtle: 1px solid rgba(240, 160, 60, 0.2);
+}
+
+/* ─── Deep Ocean (深海蓝) ─── */
+[data-theme="ocean"] {
+  --color-void:            #101828;
+  --color-shadow:          #182840;
+  --color-amethyst-deep:   #284870;
+  --color-amethyst-mid:    #4070a8;
+  --color-amethyst-light:  #80b8e0;
+  --color-gold-tarnished:  #486880;
+  --color-gold-warm:       #60b0d0;
+  --color-parchment:       #d0e8f8;
+  --color-parchment-dark:  #8098b0;
+  --color-crit-fail:       #4060c0;
+  --color-crit-success:    #40d0e0;
+  --color-success:         #40a0c0;
+  --color-fail:            #7088a0;
+  --glow-soft:    0 0 14px rgba(60, 140, 200, 0.3);
+  --glow-strong:  0 0 24px rgba(80, 180, 220, 0.4);
+  --border-subtle: 1px solid rgba(80, 160, 200, 0.2);
+}
+
+/* ─── Vampire Night (血月暗红) ─── */
+[data-theme="vampire"] {
+  --color-void:            #200810;
+  --color-shadow:          #301020;
+  --color-amethyst-deep:   #701830;
+  --color-amethyst-mid:    #a02040;
+  --color-amethyst-light:  #e06080;
+  --color-gold-tarnished:  #803040;
+  --color-gold-warm:       #d04060;
+  --color-parchment:       #f0d0d8;
+  --color-parchment-dark:  #b08090;
+  --color-crit-fail:       #e01030;
+  --color-crit-success:    #ff5080;
+  --color-success:         #d04060;
+  --color-fail:            #a07080;
+  --glow-soft:    0 0 14px rgba(200, 40, 80, 0.3);
+  --glow-strong:  0 0 24px rgba(220, 60, 100, 0.4);
+  --border-subtle: 1px solid rgba(200, 60, 80, 0.2);
+}
+
+/* ─── Light Scroll (羊皮纸浅色) ─── */
+[data-theme="light"] {
+  --color-void:            #f0e8d8;
+  --color-shadow:          #e0d4c0;
+  --color-amethyst-deep:   #a08060;
+  --color-amethyst-mid:    #c0a080;
+  --color-amethyst-light:  #8060a0;
+  --color-gold-tarnished:  #908060;
+  --color-gold-warm:       #b09040;
+  --color-parchment:       #4a3020;
+  --color-parchment-dark:  #6a5040;
+  --color-crit-fail:       #c03030;
+  --color-crit-success:    #b08020;
+  --color-success:         #309040;
+  --color-fail:            #708090;
+  --glow-soft:    0 0 14px rgba(160, 120, 200, 0.15);
+  --glow-strong:  0 0 24px rgba(160, 120, 80, 0.25);
+  --border-subtle: 1px solid rgba(140, 100, 60, 0.2);
+}
+
+/* ─── Base reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 html, body {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: default;
-  pointer-events: none;
+  width: 100%; height: 100%;
+  background: transparent; overflow: hidden;
+  user-select: none; -webkit-user-select: none;
+  cursor: default; pointer-events: none;
   font-family: var(--font-body);
 }

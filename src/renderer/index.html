@@ -122,6 +122,26 @@
       <label class="settings-row"><span>状态栏</span><input type="checkbox" id="set-show-status" checked></label>
       <label class="settings-row"><span>动画效果</span><input type="checkbox" id="set-animations" checked></label>
     </div>
+    <div class="settings-section">
+      <div class="settings-section-title">主题</div>
+      <div class="settings-row">
+        <span>预设</span>
+        <select id="set-theme" class="theme-select">
+          <option value="purple">魔法紫</option>
+          <option value="goblin">哥布林绿</option>
+          <option value="dragonfire">龙焰橙</option>
+          <option value="ocean">深海蓝</option>
+          <option value="vampire">血月红</option>
+          <option value="light">羊皮纸</option>
+        </select>
+      </div>
+      <div class="settings-row"><span>骰子辉光</span><input type="color" id="custom-glow" class="color-input" value="#a078dc"></div>
+      <div class="settings-row"><span>主文字</span><input type="color" id="custom-parchment" class="color-input" value="#f0e0c0"></div>
+      <div class="settings-row"><span>按钮/高亮</span><input type="color" id="custom-gold" class="color-input" value="#e0b840"></div>
+      <div class="settings-row"><span>大成功</span><input type="color" id="custom-crit-success" class="color-input" value="#ffd700"></div>
+      <div class="settings-row"><span>大失败</span><input type="color" id="custom-crit-fail" class="color-input" value="#d44040"></div>
+      <button id="reset-theme" class="settings-reset-btn">恢复默认主题</button>
+    </div>
     <button id="settings-close" class="settings-close-btn">关闭菜单</button>
   </div>
 

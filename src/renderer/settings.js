@@ -19,7 +19,9 @@ const Settings = (() => {
     UIManager.register(PANEL_ID, panelEl, close);
     currentSettings = await load();
     bindControls();
+    bindThemeControls();
     applyAll();
+    applyTheme(currentSettings.theme || 'purple', currentSettings.customColors || {});
   }
 
   // ─── Persistence ───
@@ -172,5 +174,68 @@ const Settings = (() => {
 
   function getSettings() { return currentSettings; }
 
-  return { init, open, close, toggle, showAchievements, getSettings };
+  // ═══════════════════════════════════════════════════════════
+  //  THEME SYSTEM
+  // ═══════════════════════════════════════════════════════════
+
+  const CUSTOM_COLOR_KEYS = {
+    'custom-glow':     ['--color-amethyst-mid', 'value'],
+    'custom-parchment':['--color-parchment', 'value'],
+    'custom-gold':     ['--color-gold-warm', 'value'],
+    'custom-crit-success': ['--color-crit-success', 'value'],
+    'custom-crit-fail':   ['--color-crit-fail', 'value'],
+  };
+
+  function bindThemeControls() {
+    const sel = document.getElementById('set-theme');
+    if (sel) {
+      sel.value = currentSettings.theme || 'purple';
+      sel.addEventListener('change', () => {
+        currentSettings.theme = sel.value;
+        applyTheme(currentSettings.theme, currentSettings.customColors || {});
+        save();
+      });
+    }
+    for (const [id, [v]] of Object.entries(CUSTOM_COLOR_KEYS)) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const saved = (currentSettings.customColors || {})[v];
+      el.value = saved || getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+      el.addEventListener('input', () => {
+        if (!currentSettings.customColors) currentSettings.customColors = {};
+        currentSettings.customColors[v] = el.value;
+        document.documentElement.style.setProperty(v, el.value);
+      });
+      el.addEventListener('change', () => save());
+    }
+    const rst = document.getElementById('reset-theme');
+    if (rst) rst.addEventListener('click', () => {
+      currentSettings.theme = 'purple';
+      currentSettings.customColors = {};
+      applyTheme('purple', {});
+      syncThemeUI();
+      save();
+    });
+  }
+
+  function applyTheme(theme, customColors) {
+    document.documentElement.setAttribute('data-theme', theme || 'purple');
+    for (const [v, c] of Object.entries(customColors || {})) {
+      document.documentElement.style.setProperty(v, c);
+    }
+  }
+
+  function syncThemeUI() {
+    const sel = document.getElementById('set-theme');
+    if (sel) sel.value = currentSettings.theme || 'purple';
+    for (const [id, [v]] of Object.entries(CUSTOM_COLOR_KEYS)) {
+      const el = document.getElementById(id);
+      if (el) {
+        const saved = (currentSettings.customColors || {})[v];
+        el.value = saved || getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+      }
+    }
+  }
+
+  return { init, open, close, toggle, showAchievements, getSettings, applyTheme, syncThemeUI };
 })();
