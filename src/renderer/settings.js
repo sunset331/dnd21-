@@ -186,6 +186,31 @@ const Settings = (() => {
     'custom-crit-fail':   ['--color-crit-fail', 'value'],
   };
 
+  // Auto-derive dark/lighter variants from main color
+  function deriveColors(varName, hex) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    if (varName === '--color-parchment') {
+      // Dark variant for subtitle/event text
+      const dark = '#' + [r,g,b].map(c => Math.round(c*0.65).toString(16).padStart(2,'0')).join('');
+      document.documentElement.style.setProperty('--color-parchment-dark', dark);
+    }
+    if (varName === '--color-gold-warm') {
+      const tarnished = '#' + [r,g,b].map(c => Math.round(c*0.55).toString(16).padStart(2,'0')).join('');
+      document.documentElement.style.setProperty('--color-gold-tarnished', tarnished);
+    }
+    if (varName === '--color-amethyst-mid') {
+      const light = '#' + [r,g,b].map(c => Math.min(255, Math.round(c*1.6)).toString(16).padStart(2,'0')).join('');
+      const deep_ = '#' + [r,g,b].map(c => Math.round(c*0.5).toString(16).padStart(2,'0')).join('');
+      document.documentElement.style.setProperty('--color-amethyst-light', light);
+      document.documentElement.style.setProperty('--color-amethyst-deep', deep_);
+      // Also update glow to match
+      document.documentElement.style.setProperty('--glow-soft', `0 0 14px rgba(${r},${g},${b},0.3)`);
+      document.documentElement.style.setProperty('--glow-strong', `0 0 24px rgba(${r},${g},${b},0.5)`);
+    }
+  }
+
   function bindThemeControls() {
     const sel = document.getElementById('set-theme');
     if (sel) {
@@ -205,6 +230,7 @@ const Settings = (() => {
         if (!currentSettings.customColors) currentSettings.customColors = {};
         currentSettings.customColors[v] = el.value;
         document.documentElement.style.setProperty(v, el.value);
+        deriveColors(v, el.value);
       });
       el.addEventListener('change', () => save());
     }
@@ -222,6 +248,7 @@ const Settings = (() => {
     document.documentElement.setAttribute('data-theme', theme || 'purple');
     for (const [v, c] of Object.entries(customColors || {})) {
       document.documentElement.style.setProperty(v, c);
+      deriveColors(v, c);
     }
   }
 
