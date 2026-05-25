@@ -1,0 +1,163 @@
+{
+  "categories": {
+    "pet_skin": "角色皮肤",
+    "window_theme": "窗口主题",
+    "particle_effect": "粒子特效"
+  },
+  "items": {
+    "skin_human_royal": {
+      "id": "skin_human_royal",
+      "name": "皇家骑士",
+      "icon": "🦸",
+      "category": "pet_skin",
+      "race": "human",
+      "price": 3000,
+      "emoji": "🦸",
+      "desc": "穿上闪亮的铠甲，你就是王国的守护者。"
+    },
+    "skin_human_wizard": {
+      "id": "skin_human_wizard",
+      "name": "大法师",
+      "icon": "🧙",
+      "category": "pet_skin",
+      "race": "human",
+      "price": 5000,
+      "emoji": "🧙",
+      "desc": "星空中最亮的法袍，附魔了三百个实用咒语。"
+    },
+    "skin_elf_shadow": {
+      "id": "skin_elf_shadow",
+      "name": "暗夜精灵",
+      "icon": "🧝‍♂️",
+      "category": "pet_skin",
+      "race": "elf",
+      "price": 3500,
+      "emoji": "🧝‍♂️",
+      "desc": "月光下的暗影舞者，优雅而致命。"
+    },
+    "skin_elf_arcane": {
+      "id": "skin_elf_arcane",
+      "name": "奥术精灵",
+      "icon": "🧝‍♀️",
+      "category": "pet_skin",
+      "race": "elf",
+      "price": 5500,
+      "emoji": "🧝‍♀️",
+      "desc": "掌握远古奥术之秘的高等精灵。"
+    },
+    "skin_dwarf_forge": {
+      "id": "skin_dwarf_forge",
+      "name": "熔炉之王",
+      "icon": "🔥",
+      "category": "pet_skin",
+      "race": "dwarf",
+      "price": 3500,
+      "emoji": "🔥",
+      "desc": "站在熔炉前的矮人，浑身散发着锻造的热浪。"
+    },
+    "skin_dwarf_miner": {
+      "id": "skin_dwarf_miner",
+      "name": "宝藏矿工",
+      "icon": "💎",
+      "category": "pet_skin",
+      "race": "dwarf",
+      "price": 5000,
+      "emoji": "💎",
+      "desc": "据说这位矮人矿工从没挖到过石头——全是宝石。"
+    },
+    "skin_goblin_king": {
+      "id": "skin_goblin_king",
+      "name": "哥布林王",
+      "icon": "🤴",
+      "category": "pet_skin",
+      "race": "goblin",
+      "price": 4000,
+      "emoji": "🤴",
+      "desc": "别被他头上的纸皇冠骗了——他的权杖是真的。"
+    },
+    "skin_goblin_jester": {
+      "id": "skin_goblin_jester",
+      "name": "混沌小丑",
+      "icon": "🃏",
+      "category": "pet_skin",
+      "race": "goblin",
+      "price": 6000,
+      "emoji": "🃏",
+      "desc": "没有人知道他是在开玩笑还是在下咒。"
+    },
+    "skin_dragon_gold": {
+      "id": "skin_dragon_gold",
+      "name": "金龙降世",
+      "icon": "🐉",
+      "category": "pet_skin",
+      "race": "dragonborn",
+      "price": 5000,
+      "emoji": "🐉",
+      "desc": "金龙的威严附着于身，金币都会自己滚过来。"
+    },
+    "skin_dragon_void": {
+      "id": "skin_dragon_void",
+      "name": "虚空之龙",
+      "icon": "🌌",
+      "category": "pet_skin",
+      "race": "dragonborn",
+      "price": 8000,
+      "emoji": "🌌",
+      "desc": "据说虚空龙裔能看到命运的尽头。"
+    },
+    "theme_ocean": {
+      "id": "theme_ocean",
+      "name": "深海主题",
+      "icon": "🌊",
+      "category": "window_theme",
+      "price": 2000,
+      "css": { "bg": "#0a1628", "surface": "#0d2137", "border": "#1a4a6e", "accent": "#44aadd" },
+      "desc": "让宠物窗口沉浸在深海的蔚蓝中。"
+    },
+    "theme_forest": {
+      "id": "theme_forest",
+      "name": "翡翠之森",
+      "icon": "🌿",
+      "category": "window_theme",
+      "price": 2000,
+      "css": { "bg": "#0d1a0d", "surface": "#142214", "border": "#1a4a1a", "accent": "#44dd88" },
+      "desc": "森林的静谧绿色，适合精灵和德鲁伊。"
+    },
+    "theme_sunset": {
+      "id": "theme_sunset",
+      "name": "日落余晖",
+      "icon": "🌅",
+      "category": "window_theme",
+      "price": 2500,
+      "css": { "bg": "#1a1410", "surface": "#2a1a14", "border": "#5a2a1a", "accent": "#ff8844" },
+      "desc": "温暖的暮色调，让每一场冒险都像凯旋。"
+    },
+    "theme_void": {
+      "id": "theme_void",
+      "name": "虚空暗影",
+      "icon": "🖤",
+      "category": "window_theme",
+      "price": 3000,
+      "css": { "bg": "#0a0a0f", "surface": "#111122", "border": "#1a1a3a", "accent": "#9944ff" },
+      "desc": "深邃的暗紫色虚空，神秘而强大。"
+    },
+    "particle_stars": {
+      "id": "particle_stars",
+      "name": "星光环绕",
+      "icon": "⭐",
+      "category": "particle_effect",
+      "price": 4000,
+      "effect": "spawnStars",
+      "desc": "宠物周围漂浮着闪烁的星光。"
+    },
+    "particle_fire": {
+      "id": "particle_fire",
+      "name": "烈焰之息",
+      "icon": "🔥",
+      "category": "particle_effect",
+      "price": 5000,
+      "effect": "spawnFire",
+      "desc": "宠物的呼吸间喷出细小的火焰。"
+    }
+  }
+}

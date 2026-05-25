@@ -1,0 +1,14 @@
+{
+  "id": "boots_epic_01",
+  "name": "踏云靴",
+  "slot": "boots",
+  "rarity": "epic",
+  "price": 5800,
+  "bonuses": {
+    "luck": 3,
+    "charisma": 3
+  },
+  "specialEffect": null,
+  "flavor": "据说穿着它走过的地方，花会开得更快。",
+  "icon": "☁️"
+}

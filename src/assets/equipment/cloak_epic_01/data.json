@@ -1,0 +1,14 @@
+{
+  "id": "cloak_epic_01",
+  "name": "凤凰羽披风",
+  "slot": "cloak",
+  "rarity": "epic",
+  "price": 5200,
+  "bonuses": {
+    "luck": 4,
+    "charisma": 2
+  },
+  "specialEffect": null,
+  "flavor": "披风上的凤凰羽毛在危难时刻会微微发烫。",
+  "icon": "🔥"
+}

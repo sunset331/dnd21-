@@ -1,0 +1,14 @@
+{
+  "id": "gauntlets_epic_01",
+  "name": "巨人杀手护手",
+  "slot": "gauntlets",
+  "rarity": "epic",
+  "price": 4800,
+  "bonuses": {
+    "charisma": 3,
+    "luck": 3
+  },
+  "specialEffect": null,
+  "flavor": "传说这双手套曾击倒过山岭巨人。",
+  "icon": "👊"
+}

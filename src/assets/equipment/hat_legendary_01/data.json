@@ -1,0 +1,18 @@
+{
+  "id": "hat_legendary_01",
+  "name": "命运王冠",
+  "slot": "hat",
+  "rarity": "legendary",
+  "price": 15000,
+  "bonuses": {
+    "charisma": 5,
+    "luck": 3
+  },
+  "specialEffect": {
+    "type": "extraRoll",
+    "chance": 0.15,
+    "desc": "15%概率额外骰一次，取高值"
+  },
+  "flavor": "据说戴上它的人能看见命运的丝线。",
+  "icon": "✨"
+}

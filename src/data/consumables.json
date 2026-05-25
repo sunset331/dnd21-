@@ -1,0 +1,62 @@
+{
+  "lucky_charm": {
+    "id": "lucky_charm",
+    "name": "幸运护符",
+    "icon": "🍀",
+    "price": 300,
+    "type": "status",
+    "effect": { "statusId": "lucky" },
+    "desc": "使用后获得「幸运」状态，持续2次冒险。",
+    "cooldownMinutes": 30
+  },
+  "dragon_incense": {
+    "id": "dragon_incense",
+    "name": "龙涎香",
+    "icon": "🕯️",
+    "price": 500,
+    "type": "status",
+    "effect": { "statusId": "dragon_blessing" },
+    "desc": "点燃后散发龙族喜爱的香气，获得「龙之祝福」，仅持续1次冒险但效果强大。",
+    "cooldownMinutes": 60
+  },
+  "antidote": {
+    "id": "antidote",
+    "name": "解毒药剂",
+    "icon": "🧪",
+    "price": 200,
+    "type": "cure",
+    "effect": { "removeStatuses": ["drunk", "cursed"] },
+    "desc": "一瓶冒着绿泡的药剂，能解除醉酒和被诅咒状态。",
+    "cooldownMinutes": 15
+  },
+  "blessed_scroll": {
+    "id": "blessed_scroll",
+    "name": "祝福卷轴",
+    "icon": "📜",
+    "price": 400,
+    "type": "status",
+    "effect": { "statusId": "merchant_favor" },
+    "desc": "阅读这份商会祝福卷轴，获得「商人青睐」，商城购物永久8折。",
+    "cooldownMinutes": 120
+  },
+  "adventure_coffee": {
+    "id": "adventure_coffee",
+    "name": "冒险咖啡",
+    "icon": "☕",
+    "price": 250,
+    "type": "status",
+    "effect": { "statusId": "adventurer_fever" },
+    "desc": "一杯浓烈的矮人咖啡，获得「冒险狂热」，每次冒险只需200次操作，持续3次。",
+    "cooldownMinutes": 45
+  },
+  "lucky_dice": {
+    "id": "lucky_dice",
+    "name": "灌铅骰子",
+    "icon": "🎲",
+    "price": 800,
+    "type": "immediate",
+    "effect": { "action": "guarantee_legendary" },
+    "desc": "使用后下次冒险必定获得传奇成功！（一次性，购买后自动生效）",
+    "cooldownMinutes": 1440
+  }
+}

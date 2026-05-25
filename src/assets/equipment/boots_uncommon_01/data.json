@@ -1,0 +1,14 @@
+{
+  "id": "boots_uncommon_01",
+  "name": "旅者之靴",
+  "slot": "boots",
+  "rarity": "uncommon",
+  "price": 600,
+  "bonuses": {
+    "luck": 1,
+    "charisma": 1
+  },
+  "specialEffect": null,
+  "flavor": "据说穿着它走过一千里的路也不会累。",
+  "icon": "🥾"
+}

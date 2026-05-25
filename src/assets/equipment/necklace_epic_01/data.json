@@ -1,0 +1,15 @@
+{
+  "id": "necklace_epic_01",
+  "name": "龙息护符",
+  "slot": "necklace",
+  "rarity": "epic",
+  "price": 5500,
+  "bonuses": {
+    "charisma": 4,
+    "luck": 2,
+    "goldFind": 5
+  },
+  "specialEffect": null,
+  "flavor": "护符中封存着一缕龙息，微微发烫。",
+  "icon": "🐉"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "cloak_rare_01",
+  "name": "暗影披风",
+  "slot": "cloak",
+  "rarity": "rare",
+  "price": 2100,
+  "bonuses": {
+    "luck": 2,
+    "charisma": 2
+  },
+  "specialEffect": null,
+  "flavor": "披风边缘似乎在不断融入周围的暗影。",
+  "icon": "🌑"
+}

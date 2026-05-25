@@ -1,0 +1,13 @@
+{
+  "id": "ring_uncommon_01",
+  "name": "月光石戒指",
+  "slot": "ring",
+  "rarity": "uncommon",
+  "price": 500,
+  "bonuses": {
+    "luck": 2
+  },
+  "specialEffect": null,
+  "flavor": "月光石在夜晚会发出柔和的蓝色光芒。",
+  "icon": "💠"
+}

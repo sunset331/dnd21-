@@ -1,0 +1,14 @@
+{
+  "id": "gauntlets_uncommon_01",
+  "name": "皮革护腕",
+  "slot": "gauntlets",
+  "rarity": "uncommon",
+  "price": 500,
+  "bonuses": {
+    "charisma": 1,
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "护腕上烙着冒险者公会的徽记。",
+  "icon": "🤚"
+}

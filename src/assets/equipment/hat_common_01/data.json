@@ -1,0 +1,13 @@
+{
+  "id": "hat_common_01",
+  "name": "皮帽",
+  "slot": "hat",
+  "rarity": "common",
+  "price": 150,
+  "bonuses": {
+    "charisma": 1
+  },
+  "specialEffect": null,
+  "flavor": "一顶普通的皮帽，至少能遮风挡雨。",
+  "icon": "🎩"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "dnd-pet",
+  "version": "0.1.0",
+  "description": "挂机养成 DND 桌宠 — 旅行青蛙 × DND 跑团",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "dependencies": {
+    "electron": "^33.0.0"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "lucky": {
+    "id": "lucky",
+    "name": "幸运",
+    "icon": "🍀",
+    "duration": 2,
+    "effects": { "luckMod": 3, "critExpand": 2 },
+    "desc": "幸运之星照耀着你，暴击范围扩展至18-20。"
+  },
+  "dragon_blessing": {
+    "id": "dragon_blessing",
+    "name": "龙之祝福",
+    "icon": "🐉",
+    "duration": 1,
+    "effects": { "luckMod": 5, "goldMod": 50 },
+    "desc": "巨龙的力量灌注全身，金币收益+50%，仅持续一次冒险。"
+  },
+  "drunk": {
+    "id": "drunk",
+    "name": "醉酒",
+    "icon": "🍺",
+    "duration": 3,
+    "effects": { "luckMod": -2, "goldMod": 10 },
+    "desc": "酒馆的麦酒劲头还在，运气变差但胆量更大。"
+  },
+  "cursed": {
+    "id": "cursed",
+    "name": "被诅咒",
+    "icon": "👻",
+    "duration": 5,
+    "effects": { "luckMod": -5, "goldMod": -20 },
+    "desc": "一股不祥的力量缠绕着你，金币收益-20%。"
+  },
+  "goblin_wanted": {
+    "id": "goblin_wanted",
+    "name": "哥布林通缉",
+    "icon": "📜",
+    "duration": 4,
+    "effects": { "goldMod": 30, "eventBias": "goblin" },
+    "desc": "哥布林部落贴出了你的通缉令，哥布林事件金币+30%。"
+  },
+  "merchant_favor": {
+    "id": "merchant_favor",
+    "name": "商人青睐",
+    "icon": "🤝",
+    "duration": 99,
+    "effects": { "shopDiscount": 20 },
+    "desc": "商会对你好感倍增，商城购物8折。"
+  },
+  "adventurer_fever": {
+    "id": "adventurer_fever",
+    "name": "冒险狂热",
+    "icon": "⚡",
+    "duration": 3,
+    "effects": { "opsDiscount": 100 },
+    "desc": "冒险的渴望在燃烧！每次冒险仅需200次操作。"
+  },
+  "blessed": {
+    "id": "blessed",
+    "name": "圣光祝福",
+    "icon": "✝️",
+    "duration": 3,
+    "effects": { "luckMod": 2, "goldMod": 15, "critExpand": 1 },
+    "desc": "圣光笼罩着你，幸运+2，金币+15%，暴击范围扩展到19-20。"
+  },
+  "hexed": {
+    "id": "hexed",
+    "name": "厄运缠身",
+    "icon": "🧿",
+    "duration": 4,
+    "effects": { "luckMod": -3, "goldMod": -15 },
+    "desc": "女巫的诅咒让你诸事不顺，幸运-3，金币-15%。"
+  },
+  "gold_fever": {
+    "id": "gold_fever",
+    "name": "淘金热",
+    "icon": "🪙",
+    "duration": 2,
+    "effects": { "goldMod": 100 },
+    "desc": "你对金币的渴望翻倍了！金币收益+100%，仅持续2次冒险。"
+  },
+  "second_wind": {
+    "id": "second_wind",
+    "name": "再起之风",
+    "icon": "💨",
+    "duration": 1,
+    "effects": { "secondChance": true },
+    "desc": "失败时自动重骰一次（取高值），仅一次。"
+  },
+  "invisible": {
+    "id": "invisible",
+    "name": "隐身术",
+    "icon": "🫥",
+    "duration": 2,
+    "effects": { "failImmune": true },
+    "desc": "失败和大失败不会触发，你可以安全地尝试危险事件。"
+  },
+  "berserker_rage": {
+    "id": "berserker_rage",
+    "name": "狂暴之怒",
+    "icon": "💢",
+    "duration": 2,
+    "effects": { "luckMod": -2, "goldMod": 40, "critExpand": -1 },
+    "desc": "你失去了理智——但金币也跟着翻倍了！金币+40%，暴击范围缩小。"
+  },
+  "mimic_curse": {
+    "id": "mimic_curse",
+    "name": "宝箱怪的诅咒",
+    "icon": "📦",
+    "duration": 5,
+    "effects": { "goldMod": -10, "mimicAttract": true },
+    "desc": "你被宝箱怪诅咒了！怪物事件权重翻倍，金币-10%。"
+  }
+}

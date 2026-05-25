@@ -1,0 +1,14 @@
+{
+  "id": "necklace_rare_01",
+  "name": "人鱼之泪",
+  "slot": "necklace",
+  "rarity": "rare",
+  "price": 2200,
+  "bonuses": {
+    "charisma": 3,
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "一颗永远不会干涸的珍珠，据说能带来好运。",
+  "icon": "🫧"
+}

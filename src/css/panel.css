@@ -1,0 +1,275 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --border: #0f3460;
+  --text: #e0e0e0;
+  --text-dim: #8a8aaa;
+  --gold: #ffd700;
+  --accent: #e94560;
+  --success: #44dd88;
+  --radius: 8px;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+#panel-window {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+}
+#panel-drag-handle {
+  -webkit-app-region: drag; cursor: grab;
+  height: 12px; flex-shrink: 0;
+}
+#panel-drag-handle:active { cursor: grabbing; }
+button, input, select, .tab-btn, #btn-close-panel, .ctx-item {
+  -webkit-app-region: no-drag;
+}
+
+/* ===== Tab 栏 ===== */
+#tab-bar {
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  -webkit-app-region: drag;
+}
+.tab-btn {
+  flex: 1; padding: 10px 0;
+  border: none; border-bottom: 2px solid transparent;
+  background: transparent; color: var(--text-dim);
+  font-size: 12px; cursor: pointer; transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+#btn-close-panel {
+  margin-left: auto; padding: 6px 12px; border: none;
+  background: transparent; color: var(--text-dim); font-size: 16px;
+  cursor: pointer; border-radius: 4px; transition: all 0.2s;
+}
+#btn-close-panel:hover { background: rgba(233,69,96,0.15); color: var(--danger); }
+
+/* ===== Tab 内容 ===== */
+#tab-content { flex: 1; overflow-y: auto; padding: 12px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ===== 角色面板 ===== */
+#char-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px; background: var(--surface); border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+#panel-char-emoji { font-size: 48px; }
+#panel-char-name { font-size: 18px; color: var(--text); }
+#panel-char-race { font-size: 12px; color: var(--text-dim); }
+
+#char-stats { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.stat-row {
+  display: flex; justify-content: space-between;
+  padding: 8px 10px; background: var(--surface); border-radius: 6px;
+  font-size: 13px;
+}
+.stat-row span:first-child { color: var(--text-dim); }
+.stat-row span:last-child { color: var(--text); font-weight: 600; }
+
+#char-statuses h4 { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; }
+#status-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.status-tag {
+  padding: 4px 10px; border-radius: 12px; font-size: 11px;
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 4px;
+}
+
+/* ===== 装备面板 ===== */
+#equipment-slots { display: flex; flex-direction: column; gap: 8px; }
+.equipment-slot {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; background: var(--surface); border-radius: var(--radius);
+}
+.slot-icon { font-size: 24px; width: 36px; text-align: center; }
+.slot-info { flex: 1; }
+.slot-name { font-size: 12px; color: var(--text-dim); }
+.slot-item { font-size: 14px; color: var(--text); font-weight: 600; }
+.slot-bonus { font-size: 11px; color: var(--gold); }
+
+/* ===== 商城 ===== */
+.shop-section-label {
+  font-size: 12px; font-weight: 700; color: var(--text);
+  padding: 10px 0 6px; display: flex; align-items: baseline; gap: 8px;
+}
+.shop-section-hint { font-size: 10px; color: var(--text-dim); font-weight: 400; }
+
+#shop-gold, #inventory-gold {
+  text-align: center; font-size: 18px; font-weight: 700; color: var(--gold);
+  padding: 10px; margin-bottom: 10px;
+}
+#shop-equipment, #shop-consumables { display: flex; flex-direction: column; gap: 8px; }
+.shop-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); transition: border-color 0.2s;
+}
+.shop-item:hover { border-color: var(--gold); }
+.shop-item.equipped { border-color: var(--success); opacity: 0.6; }
+.shop-item.daily-special { border-color: #ff8c00; background: rgba(255,140,0,0.05); }
+.shop-item.daily-special::after { content: '🔥特价'; font-size: 9px; color: #ff8c00; position: absolute; top: 4px; right: 6px; }
+.shop-item-icon { font-size: 28px; }
+.shop-item-info { flex: 1; }
+.shop-item-name { font-size: 13px; font-weight: 600; }
+.shop-item-flavor { font-size: 10px; color: var(--text-dim); }
+.shop-item-stats { font-size: 10px; color: var(--gold); }
+.shop-item-price { font-size: 14px; font-weight: 700; color: var(--gold); text-align: right; }
+.shop-item-price .original-price { font-size: 10px; color: var(--text-dim); text-decoration: line-through; }
+.shop-item-buy {
+  padding: 4px 12px; border: none; border-radius: 4px;
+  background: var(--gold); color: var(--bg); font-size: 12px;
+  font-weight: 700; cursor: pointer;
+}
+.shop-item-buy:disabled { background: var(--text-dim); cursor: not-allowed; }
+
+/* 稀有度颜色 */
+.rarity-common { color: #aaa; }
+.rarity-uncommon { color: #44dd88; }
+.rarity-rare { color: #4488ff; }
+.rarity-epic { color: #cc44ff; }
+.rarity-legendary { color: #ff8c00; }
+
+/* ===== 消耗品背包 ===== */
+#consumable-list { display: flex; flex-direction: column; gap: 8px; }
+.consumable-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.consumable-card-icon { font-size: 28px; }
+.consumable-card-info { flex: 1; }
+.consumable-card-name { font-size: 13px; font-weight: 600; }
+.consumable-card-desc { font-size: 10px; color: var(--text-dim); }
+.consumable-card-qty { font-size: 12px; color: var(--gold); }
+.consumable-use-btn {
+  padding: 4px 12px; border: 1px solid var(--gold); border-radius: 4px;
+  background: transparent; color: var(--gold); font-size: 12px;
+  cursor: pointer;
+}
+.consumable-use-btn:hover { background: var(--gold); color: var(--bg); }
+.consumable-use-btn:disabled { border-color: var(--text-dim); color: var(--text-dim); cursor: not-allowed; }
+
+/* ===== 冒险日志 ===== */
+#log-entries { display: flex; flex-direction: column; gap: 8px; }
+.log-entry {
+  padding: 10px; background: var(--surface); border-radius: var(--radius);
+  font-size: 11px; line-height: 1.6;
+}
+.log-entry { cursor: pointer; transition: border-color 0.2s; }
+.log-entry:hover { border-color: var(--gold); }
+.log-entry .log-line1 { color: var(--text); }
+.log-entry .log-line2 { color: var(--text-dim); font-size: 10px; }
+
+/* 日志详情弹窗 */
+.log-detail-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,8,18,0.85);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; border-radius: 8px;
+}
+.log-detail-card {
+  background: var(--surface); border: 1px solid var(--gold); border-radius: 12px;
+  padding: 20px 18px; width: 240px; text-align: center;
+  box-shadow: 0 0 20px rgba(180,130,60,0.2);
+  animation: popIn 0.25s ease;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.log-detail-card h4 { font-size: 15px; color: var(--gold); margin-bottom: 4px; }
+.log-detail-story {
+  background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px;
+  margin-bottom: 8px; border-left: 2px solid var(--gold);
+}
+.log-detail-story p {
+  font-size: 12px; color: var(--text); line-height: 1.7;
+  margin-bottom: 4px; text-align: left;
+}
+.log-detail-stats {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  font-size: 11px; color: var(--text-dim); margin-bottom: 4px;
+}
+.log-detail-stats span { padding: 2px 8px; background: rgba(255,255,255,0.04); border-radius: 4px; }
+.log-detail-stats strong { color: var(--gold); }
+.log-detail-time { font-size: 10px; color: var(--text-dim); }
+.log-detail-close {
+  margin-top: 4px; padding: 5px 20px; border: 1px solid var(--gold);
+  border-radius: 6px; background: transparent; color: var(--gold);
+  font-size: 12px; cursor: pointer;
+}
+.log-detail-close:hover { background: rgba(212,168,67,0.1); }
+
+/* ===== 成就 ===== */
+#achievement-categories { display: flex; flex-direction: column; gap: 14px; }
+.ach-category h4 {
+  font-size: 12px; color: var(--text-dim); margin-bottom: 6px;
+  padding-bottom: 4px; border-bottom: 1px solid var(--border);
+}
+.ach-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; margin-bottom: 4px;
+  background: var(--surface); border-radius: 6px;
+}
+.ach-card.locked { opacity: 0.4; }
+.ach-card.unlocked { border: 1px solid var(--gold); }
+.ach-card.new-unlock { border: 1px solid var(--gold); animation: achGlow 0.6s ease 3; }
+@keyframes achGlow { 0%,100% { box-shadow: 0 0 4px var(--gold); } 50% { box-shadow: 0 0 16px var(--gold); } }
+.ach-icon { font-size: 24px; }
+.ach-info { flex: 1; }
+.ach-name { font-size: 12px; font-weight: 600; }
+.ach-desc { font-size: 10px; color: var(--text-dim); }
+.ach-progress { font-size: 9px; color: var(--text-dim); }
+.ach-progress .done { color: var(--gold); }
+
+/* ===== 套装 ===== */
+.set-bonus-section { margin-top: 8px; }
+.set-bonus-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px; margin-bottom: 4px;
+  background: var(--surface); border: 1px solid #ff8c00;
+  border-radius: 6px; font-size: 11px;
+}
+
+/* ===== 统计 ===== */
+#stats-dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat-card {
+  padding: 14px 10px; background: var(--surface); border-radius: var(--radius);
+  text-align: center;
+}
+.stat-card-value { font-size: 22px; font-weight: 700; color: var(--gold); }
+.stat-card-label { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+/* ===== 设置 ===== */
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 10px; margin-bottom: 6px;
+  background: var(--surface); border-radius: var(--radius);
+  font-size: 13px;
+}
+.setting-toggle {
+  padding: 4px 16px; border: none; border-radius: 12px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.setting-toggle.on { background: var(--success); color: #1a1a2e; }
+.setting-toggle.off { background: var(--text-dim); color: #1a1a2e; }
+.setting-row select {
+  padding: 4px 8px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text); font-size: 12px;
+}
+
+/* ===== 外观 Tab ===== */
+#cosmetic-skins, #cosmetic-themes, #cosmetic-particles {
+  display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;
+}

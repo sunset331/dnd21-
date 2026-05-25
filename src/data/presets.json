@@ -1,0 +1,47 @@
+{
+  "human_knight": {
+    "name": "罗兰·晨星",
+    "gender": "male",
+    "race": "human",
+    "gold": 150,
+    "portrait": "A noble human knight in silver plate armor, short brown hair, determined expression, holding a longsword, DND fantasy art style, character portrait",
+    "backstory": "曾是王国骑士团的见习骑士，在一次边境冲突中展现了非凡的勇气，从此踏上了冒险之路。",
+    "equipment": { "weapon": "weapon_common_01", "cloak": "cloak_common_01" }
+  },
+  "elf_ranger": {
+    "name": "莉雅·月影",
+    "gender": "female",
+    "race": "elf",
+    "gold": 120,
+    "portrait": "An elegant elf ranger with silver hair and pointed ears, green forest cloak, holding an ornate elven bow, mystical forest background, DND fantasy art style, character portrait",
+    "backstory": "来自月光森林的精灵游侠，为了寻找失落的精灵古遗物而离开家园，眼睛能在黑暗中视物。",
+    "equipment": { "weapon": "weapon_uncommon_01", "cloak": "cloak_uncommon_01" }
+  },
+  "dwarf_smith": {
+    "name": "巴林·铁拳",
+    "gender": "male",
+    "race": "dwarf",
+    "gold": 200,
+    "portrait": "A stout dwarf blacksmith with a magnificent braided red beard, leather apron over chainmail, holding a glowing forge hammer, sparks flying, DND fantasy art style, character portrait",
+    "backstory": "铁炉堡最年轻的锻造大师，因为打造了一件传说中的装备而被逐出师门——师父说他『还不够格』。",
+    "equipment": { "weapon": "weapon_rare_01", "gauntlets": "gauntlets_rare_01" }
+  },
+  "goblin_trickster": {
+    "name": "吱吱·暗袋",
+    "gender": "male",
+    "race": "goblin",
+    "gold": 80,
+    "portrait": "A mischievous goblin rogue with large pointy ears and a toothy grin, wearing a patchwork leather vest, holding a glowing dice, shadowy alley background, DND fantasy art style, character portrait",
+    "backstory": "没人知道吱吱是从哪来的——包括他自己。他只知道幸运女神跟他开了个玩笑：他的运气好得离谱。",
+    "equipment": { "ring": "ring_common_01", "boots": "boots_common_01" }
+  },
+  "dragonborn_paladin": {
+    "name": "萨洛斯·龙焰",
+    "gender": "female",
+    "race": "dragonborn",
+    "gold": 180,
+    "portrait": "A majestic dragonborn paladin with golden scales and draconic features, wearing ornate golden plate armor with a celestial glow, holding a massive two-handed sword, temple background, DND fantasy art style, character portrait",
+    "backstory": "龙神神殿的守护者，身上的金色鳞片是祖先与天界龙族盟约的证明。她的龙息是治愈而非毁灭。",
+    "equipment": { "weapon": "weapon_epic_01", "necklace": "necklace_rare_01" }
+  }
+}

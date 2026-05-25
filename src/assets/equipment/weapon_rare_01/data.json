@@ -1,0 +1,14 @@
+{
+  "id": "weapon_rare_01",
+  "name": "矮人战斧",
+  "slot": "weapon",
+  "rarity": "rare",
+  "price": 2500,
+  "bonuses": {
+    "charisma": 2,
+    "luck": 2
+  },
+  "specialEffect": null,
+  "flavor": "斧刃上刻着矮人族的战斗祷文。",
+  "icon": "🪓"
+}

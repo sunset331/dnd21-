@@ -1,0 +1,14 @@
+{
+  "id": "boots_rare_01",
+  "name": "疾风靴",
+  "slot": "boots",
+  "rarity": "rare",
+  "price": 2300,
+  "bonuses": {
+    "luck": 3,
+    "charisma": 1
+  },
+  "specialEffect": null,
+  "flavor": "鞋底刻着风之符文，每一步都像踩在微风上。",
+  "icon": "💨"
+}

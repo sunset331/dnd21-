@@ -1,0 +1,43 @@
+{
+  "adventurer": {
+    "name": "冒险者套装",
+    "icon": "⚔️",
+    "pieces": ["hat_common_01", "weapon_common_01", "boots_common_01", "cloak_common_01"],
+    "minEquipped": 3,
+    "bonus": { "charisma": 1, "luck": 1 },
+    "desc": "每个冒险者梦开始的地方。"
+  },
+  "elven_legacy": {
+    "name": "精灵遗产",
+    "icon": "🧝",
+    "pieces": ["weapon_uncommon_01", "ring_uncommon_01", "cloak_uncommon_01"],
+    "minEquipped": 3,
+    "bonus": { "luck": 2, "goldFind": 5 },
+    "desc": "精灵工匠在月光下铸造的轻灵装备。"
+  },
+  "dwarven_forge": {
+    "name": "矮人锻造",
+    "icon": "⛏️",
+    "pieces": ["weapon_rare_01", "gauntlets_rare_01", "boots_rare_01"],
+    "minEquipped": 3,
+    "bonus": { "charisma": 2, "goldFind": 10 },
+    "desc": "矮人熔炉中千锤百炼的杰作。"
+  },
+  "dragon_guard": {
+    "name": "龙之守护",
+    "icon": "🐉",
+    "pieces": ["hat_epic_01", "necklace_epic_01", "gauntlets_epic_01", "cloak_epic_01"],
+    "minEquipped": 3,
+    "bonus": { "charisma": 3, "luck": 3 },
+    "desc": "传说中屠龙者穿戴的装备，至今残留着龙息的热度。"
+  },
+  "fate_weaver": {
+    "name": "命运编织",
+    "icon": "✨",
+    "pieces": ["hat_legendary_01", "ring_legendary_01", "cloak_legendary_01"],
+    "minEquipped": 3,
+    "bonus": { "luck": 5 },
+    "specialEffect": { "type": "extraRoll", "chance": 0.1, "desc": "10%额外骰一次" },
+    "desc": "命运三女神亲自编织的奇迹之物。"
+  }
+}

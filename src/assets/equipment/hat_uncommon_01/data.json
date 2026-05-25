@@ -1,0 +1,13 @@
+{
+  "id": "hat_uncommon_01",
+  "name": "冒险者宽檐帽",
+  "slot": "hat",
+  "rarity": "uncommon",
+  "price": 600,
+  "bonuses": {
+    "charisma": 2
+  },
+  "specialEffect": null,
+  "flavor": "帽檐上别着一根不知名鸟类的羽毛。",
+  "icon": "🤠"
+}

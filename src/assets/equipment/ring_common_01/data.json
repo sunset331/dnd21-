@@ -1,0 +1,13 @@
+{
+  "id": "ring_common_01",
+  "name": "铜戒指",
+  "slot": "ring",
+  "rarity": "common",
+  "price": 100,
+  "bonuses": {
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "一枚简单的铜环，内侧刻着模糊的字迹。",
+  "icon": "💍"
+}

@@ -1,0 +1,1399 @@
+[
+  {
+    "id": "goblin_cave",
+    "name": "地精洞穴",
+    "category": "dungeon",
+    "rarity": "common",
+    "weight": 10,
+    "locations": ["阴暗的地精洞穴", "废弃的矿道深处", "哥布林挖出的地道"],
+    "creatures": ["独眼地精", "宝石哥布林", "洞穴地精王"],
+    "baseGoldMin": 30,
+    "baseGoldMax": 80,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "你在{location}遭遇{creature}，{raceTrait}让你看穿了它的弱点，一击制胜后发现了{treasure}！",
+          "{creature}在{location}设下陷阱，但你凭借{raceTrait}反将一军，缴获了{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.5,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "你在{location}与{creature}激战，巧妙利用地形取胜，搜刮到了{treasure}！",
+          "{creature}在{location}拦住了去路，一番缠斗后你占了上风，找到了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}遇到了{creature}，经过一番较量，最终带着{treasure}全身而退。",
+          "{location}里的{creature}不是你的对手，你顺利拿走了{treasure}。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "你在{location}碰见了{creature}，战斗打得磕磕绊绊，不过还是捡到了一些金币。",
+          "{creature}在{location}里四处游荡，你小心避开正面冲突，只捡了点零碎金币。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}被{creature}打了个措手不及，狼狈逃出时掉了一些金币。",
+          "{creature}在{location}设下了埋伏！你勉强逃脱，但金币撒了一路。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}远比想象中强大！你被揍得鼻青脸肿，金币也被抢走了。",
+          "你在{location}踩中了{creature}的陷阱，不仅一无所获，连身上的金币也丢了。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "ancient_tomb",
+    "name": "古老墓穴",
+    "category": "dungeon",
+    "rarity": "common",
+    "weight": 8,
+    "locations": ["风化的古代墓穴", "被遗忘的地下陵墓", "石棺密布的地下室"],
+    "creatures": ["亡灵守卫", "石像鬼", "墓穴巫妖"],
+    "baseGoldMin": 40,
+    "baseGoldMax": 100,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}深处，{creature}守护着一座黄金棺椁，{raceTrait}助你破解了谜题，棺中宝藏尽归你手！",
+          "{creature}在{location}中沉睡了千年，你用{raceTrait}唤醒了它的善意，它赠予了你{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.5,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{location}的{creature}挡住了去路，你破解了墓穴机关将它困住，夺得了{treasure}！",
+          "你穿行在{location}的迷宫走廊中，击败{creature}后发现了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}中小心翼翼地前进，避开了{creature}的巡逻路线，找到了{treasure}。",
+          "{creature}在{location}里徘徊不去，你找准时机绕过了它，拿到了{treasure}。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}里的{creature}太过强大，你只敢在入口附近搜刮了些散落金币。",
+          "你在{location}被{creature}的吼声吓得腿软，匆忙中只抓了一把金币就跑。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{location}的{creature}突然从暗处袭来！你仓皇逃跑，掉落了随身金币。",
+          "你在{location}触发了一个古老的诅咒陷阱，{creature}趁机夺走了你的金币。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}坍塌了！{creature}在混乱中将你洗劫一空，你侥幸捡回一条命。",
+          "你在{location}触怒了{creature}的远古诅咒，不仅金币被夺，还被下了咒。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "forest_fey",
+    "name": "精灵林地",
+    "category": "wilderness",
+    "rarity": "common",
+    "weight": 9,
+    "locations": ["月光下的精灵林地", "迷雾缭绕的仙境沼泽", "古老的树精议会"],
+    "creatures": ["调皮的树精", "高傲的精灵贵族", "迷路的仙灵"],
+    "baseGoldMin": 35,
+    "baseGoldMax": 90,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{creature}在{location}为你指引了一条密道，{raceTrait}让你赢得了仙灵的信任，获得了{treasure}！",
+          "你在{location}用{raceTrait}解开了{creature}的谜语，它笑着将{treasure}送给了你！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.5,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}向你发起了谜语挑战，你答对了大半，赢得了{treasure}！",
+          "在{location}，你用歌声打动了{creature}，它指引你找到了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}遇见了{creature}，一番愉快的交谈后，它送了你一些金币。",
+          "{location}的{creature}心情不错，顺手从树上摘下了{treasure}递给你。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{creature}在{location}对你开了个玩笑，你被耍得团团转，不过还是捡到了几枚金币。",
+          "你在{location}迷了路，{creature}指了个方向——虽然不太靠谱，但路上捡了些金币。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}用幻术戏弄了你，等你回过神来，发现口袋里少了金币。",
+          "你在{location}不小心冒犯了{creature}，它一生气就偷走了你的金币。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}对你下了恶作剧诅咒！你晕头转向地走出了林地，金币全掉光了。",
+          "你在{location}喝下了{creature}递来的「仙灵蜜酒」，醒来后发现金币被洗劫一空。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "tavern_gamble",
+    "name": "酒馆赌局",
+    "category": "town",
+    "rarity": "common",
+    "weight": 7,
+    "locations": ["烟雾缭绕的酒馆", "地下赌场", "冒险者公会大厅"],
+    "creatures": ["狡诈的赌徒", "退役的老佣兵", "神秘的面具商人"],
+    "baseGoldMin": 20,
+    "baseGoldMax": 120,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}向你发起了骰子对决，{raceTrait}让你看穿了对手的破绽，大获全胜赢走了{treasure}！",
+          "{creature}在{location}摆下了赌局，你用{raceTrait}连赢三把，桌上堆满了{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.5,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "你在{location}与{creature}对赌，手气正旺，赢到了一袋{treasure}！",
+          "{location}里{creature}的酒后豪赌正中你下怀，你笑着收下了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "{location}的{creature}邀你玩了一把牌，你小赢了一笔，够喝好几轮了。",
+          "你在{location}参与了{creature}发起的赌局，运气不差，赢了些金币。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "在{location}和{creature}赌了一把，输多赢少，但至少麦酒畅饮。",
+          "{creature}在{location}拉你入局，你玩得心惊胆战，最后只捞回本钱。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}出老千！你连输数局，钱包瘪了大半。",
+          "你在{location}喝多了，被{creature}哄着下了重注——当然，输了。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "你在{location}被{creature}灌醉后签了张借据，醒来时金币已经不翼而飞。",
+          "{location}的赌局是个彻头彻尾的骗局！{creature}和他的同伙抢走了你所有金币。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "merchant_caravan",
+    "name": "商队护卫",
+    "category": "town",
+    "rarity": "uncommon",
+    "weight": 6,
+    "conditions": { "minCharisma": 6 },
+    "locations": ["通往王都的商道", "边境关隘的市场", "沙漠绿洲的集市"],
+    "creatures": ["富有的商队首领", "被劫匪包围的商人", "兜售奇物的小贩"],
+    "baseGoldMin": 50,
+    "baseGoldMax": 130,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{creature}在{location}遭到劫匪围攻，{raceTrait}助你以一敌三击退匪徒，商人感激涕零地给了你{treasure}！",
+          "你在{location}救了{creature}一命，没想到他是王国的秘密富商，慷慨赠予{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.6,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}的货物散落一地，你帮忙收拾，意外发现了值钱的{treasure}！",
+          "你在{location}帮{creature}赶走了骚扰的怪物，他高兴地分了你{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "{creature}在{location}雇你当临时护卫，一路平安，你拿到了不错的报酬。",
+          "你在{location}帮{creature}搬运货物，他给了你一笔丰厚的小费。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的{creature}跟你讨价还价了半天，最后只给了你几个铜板。",
+          "你在{location}为{creature}跑腿，报酬不多，但也够喝一杯了。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{location}的{creature}原来是个奸商！你买的「魔法道具」全是假货，亏了不少金币。",
+          "你在{location}上了{creature}的当，付了定金后他就消失在了人群中。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{creature}的商队在{location}遭遇了龙袭！你拼命救出的货物全是面粉，自己还搭上了金币。",
+          "你在{location}为{creature}担保了一笔生意，结果对方跑了，你赔了个精光。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "cliff_climb",
+    "name": "悬崖攀爬",
+    "category": "wilderness",
+    "rarity": "uncommon",
+    "weight": 5,
+    "conditions": { "minCharisma": 8 },
+    "locations": ["海边的绝壁", "云雾缭绕的山巅", "龙鹰筑巢的悬崖"],
+    "creatures": ["盘旋的狮鹫", "守护巢穴的龙鹰", "山巅的隐士"],
+    "baseGoldMin": 60,
+    "baseGoldMax": 150,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "你攀上了{location}的最顶端，{raceTrait}让你在{creature}的巢穴中发现了{treasure}！",
+          "在{location}之巅，{creature}向你俯冲而来，你用{raceTrait}化险为夷，巢穴中竟藏着{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.5,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "你爬上{location}，{creature}在远处盘旋，你趁机摸进巢穴，拿到了{treasure}！",
+          "在{location}，你绕过了{creature}的视线，在岩缝中找到了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你成功登上了{location}，避开了{creature}，找到了被遗忘的宝藏。",
+          "{location}的攀登虽然惊险，但你最终在岩缝中发现了一些金币。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}太难爬了，你只到了半山腰，不过还是捡到了一些鹰巢里掉落的金币。",
+          "{creature}在{location}盯上了你，你不敢久留，匆匆捡了几枚金币就撤了。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "在{location}攀爬时脚下一滑，你掉进了{creature}的领地，仓皇逃跑时丢了金币。",
+          "你在{location}遇到了暴风雨，{creature}趁乱叼走了你的钱袋。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}发生了山崩！你差点摔下悬崖，{creature}还趁机抢走了你的背包。",
+          "你在{location}失足滑倒，一路滚到了山脚，金币散落了一路。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "swamp_monster",
+    "name": "沼泽暗影",
+    "category": "wilderness",
+    "rarity": "rare",
+    "weight": 4,
+    "conditions": { "minCharisma": 10 },
+    "locations": ["散发毒雾的黑沼泽", "被诅咒的泥沼地", "沉没之城的废墟"],
+    "creatures": ["沼泽多头蛇", "泥沼巨鳄", "被遗忘的溺亡者之王"],
+    "baseGoldMin": 80,
+    "baseGoldMax": 200,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}深处，{creature}守护着沉没之城的宝藏，{raceTrait}让你在水中如履平地，夺得了{treasure}！",
+          "{creature}在{location}向你喷出毒雾，但{raceTrait}让你毫发无伤，反手夺下了它守护的{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.6,
+        "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}与{creature}周旋，利用沼泽地形设下陷阱，成功缴获{treasure}！",
+          "{location}里{creature}的咆哮震耳欲聋，但你沉着应对，最终抢到了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.25,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}涉水而行，小心翼翼避开了{creature}的领地，找到了{treasure}。",
+          "{location}的{creature}正在沉睡，你趁机从它身边偷走了{treasure}。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的毒雾太浓了，你不敢深入，只在沼泽边缘捞到了几枚金币。",
+          "{creature}的吼声从{location}深处传来，你决定见好就收。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}陷入了沼泽！{creature}闻声而来，你拼命挣脱但金币全陷进了泥里。",
+          "{location}的{creature}用尾巴把你扫进了泥潭，你狼狈地爬出来，发现金币不见了。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}喷出毒液！你躲闪不及，浑身是毒地逃了回来，金币也丢了。",
+          "你在{location}被{creature}拖进了深沼，虽然挣脱了，但装备和金币都被泥沼吞没。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "dragon_lair",
+    "name": "龙巢侦察",
+    "category": "dungeon",
+    "rarity": "rare",
+    "weight": 3,
+    "conditions": { "minCharisma": 12 },
+    "locations": ["冒烟的火山龙巢", "冰封的远古龙穴", "被金币堆满的巨龙殿堂"],
+    "creatures": ["沉睡的年轻红龙", "多疑的远古冰龙", "喜欢猜谜的宝石龙"],
+    "baseGoldMin": 100,
+    "baseGoldMax": 300,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "你潜入{location}，{creature}正在龙金币堆上打鼾，{raceTrait}让你无声无息地偷走了{treasure}！",
+          "在{location}，{creature}醒来发现你，但{raceTrait}让你说服了它分享宝藏，你拿到了{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.7,
+        "statusChance": 0.5
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}的鼾声如雷，你趁机从金币堆边缘偷到了{treasure}！",
+          "你在{location}发现了{creature}的蜕皮，用龙鳞制成装备后还顺走了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.3,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你摸进{location}，{creature}睡得很沉，你悄悄捡了金币堆边缘的{treasure}就跑。",
+          "{location}的{creature}今天心情不错，答应让你从金币堆里抓一把——你抓了一大把。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0.1,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}里{creature}的呼吸声让你腿软，你只敢在洞口捡了几枚散落的金币。",
+          "你在{location}门口探头探脑，{creature}翻了个身你吓得就跑——但手里攥了一把金币。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}不小心踩到了{creature}的尾巴！它一声怒吼把你吹飞了出去，金币撒了一地。",
+          "{creature}在{location}突然睁眼盯着你，你吓得转身就跑，金币从口袋里不断掉落。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}对你喷出了龙息！你虽然躲开了，但浑身的金币都被烧熔了。",
+          "你在{location}被{creature}当成小偷追杀了三里地，金币丢了不说，还被龙焰烧焦了衣服。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "shadow_pursuit",
+    "name": "暗影追杀",
+    "category": "mystery",
+    "rarity": "rare",
+    "weight": 3,
+    "conditions": { "minCharisma": 14 },
+    "locations": ["午夜的无名小巷", "被遗忘的神殿废墟", "闹鬼的贵族庄园"],
+    "creatures": ["暗影公会刺客", "复仇的鬼魂", "神秘的蒙面追踪者"],
+    "baseGoldMin": 90,
+    "baseGoldMax": 250,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}将你逼入了死角，但{raceTrait}让你绝地反击，反而从刺客身上搜出了{treasure}！",
+          "{creature}在{location}追杀你三条街，你用{raceTrait}设下圈套反杀，缴获{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.6,
+        "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}被{creature}盯上了，一番追逐后你躲进了暗道，意外发现了{treasure}！",
+          "{creature}在{location}设下了埋伏，你将计就计，反手夺走了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.25,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}察觉到{creature}的跟踪，及时甩开了对方，还捡到了{treasure}。",
+          "{location}的{creature}追了你一路，你最终混入人群逃脱，口袋里多了{treasure}。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{creature}在{location}追得太紧了，你几乎没时间搜刮，只捡到了一点金币。",
+          "你在{location}被{creature}追得气喘吁吁，好在路边捡到了几枚金币。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}抓住了你的破绽，你挨了两下，逃出来后发现金币少了。",
+          "你在{location}被{creature}逼得跳进了河里，虽然保住了命，但金币沉了底。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{creature}在{location}给你下了毒！你昏迷了一整天，醒来发现金币和装备都不见了。",
+          "你在{location}被{creature}绑了起来，被迫交出所有金币才保住了一条命。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "town_festival",
+    "name": "城镇庆典",
+    "category": "social",
+    "rarity": "uncommon",
+    "weight": 6,
+    "locations": ["彩旗飘扬的城镇广场", "灯火通明的丰收祭", "王国的年度勇者大赛"],
+    "creatures": ["热情过度的镇长", "来访的邻国王子", "退役的英雄裁判"],
+    "baseGoldMin": 30,
+    "baseGoldMax": 140,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}宣布你赢得了勇者大赛的冠军！{raceTrait}让你在所有项目中夺冠，奖品是{treasure}！",
+          "{creature}在{location}举办的抽奖中，你凭借{raceTrait}抽中了头奖，获得{treasure}！"
+        ],
+        "goldMult": 2.5,
+        "itemChance": 0.5,
+        "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "你在{location}参加了{creature}主办的射箭比赛，准头不错，赢得了{treasure}！",
+          "{location}的{creature}举行了一场拍卖会，你慧眼识珠，低价拍到了{treasure}。"
+        ],
+        "goldMult": 1.8,
+        "itemChance": 0.2,
+        "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "{location}热闹非凡，{creature}拉着你参加了各种游戏，你赢了不少金币。",
+          "在{location}的庆典上，{creature}赞助了一场比武，你拿到了不错的名次和赏金。"
+        ],
+        "goldMult": 1.0,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的{creature}太热情了，拉着你喝了一下午的酒——奖励没拿到，但挺开心的。",
+          "你在{location}参加了{creature}的趣味竞赛，没拿到名次，但领了参与奖。"
+        ],
+        "goldMult": 0.6,
+        "itemChance": 0,
+        "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{location}的{creature}推销给你一堆「节日限定」商品，回家发现全是垃圾。",
+          "在{location}的庆典上，你被{creature}灌醉了，醒来发现花了不少冤枉钱。"
+        ],
+        "goldMult": 0,
+        "itemChance": 0,
+        "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的庆典发生了意外！{creature}放错了焰火把市集炸了，你的金币全赔了。",
+          "你在{location}被{creature}污蔑偷了庆典的奖品，被罚了一大笔金币才脱身。"
+        ],
+        "goldMult": -0.3,
+        "itemChance": 0,
+        "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "pirate_raid",
+    "name": "海盗袭击",
+    "category": "wilderness",
+    "rarity": "rare",
+    "weight": 4,
+    "conditions": { "minCharisma": 11 },
+    "locations": ["风暴肆虐的近海", "海盗盘踞的珊瑚礁", "沉船密布的暗礁区"],
+    "creatures": ["独眼海盗船长", "亡灵海盗团", "塞壬海妖"],
+    "baseGoldMin": 70,
+    "baseGoldMax": 220,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}的船被你的{raceTrait}吓得掉头就跑，你登船搜出了{treasure}！",
+          "{creature}在{location}的宝藏被你发现，{raceTrait}助你解开藏宝图，获得了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.6, "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}与{creature}展开海战，一发精准的弩炮让对方投降，缴获{treasure}！",
+          "{creature}在{location}向你开炮，你灵活地绕过礁石反击，夺走了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.25, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}遇到了{creature}，一番周旋后成功脱身，还带走了{treasure}。",
+          "{location}的{creature}正在分赃，你趁机顺走了一袋{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}风浪太大，你只敢在浅水区摸了几枚沉船金币就返航了。",
+          "{creature}在{location}的船太大了，你只敢远远地捡了点漂来的金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}击沉了你的小船！你游回岸边，金币全泡了海水。",
+          "你在{location}被{creature}抓上了贼船，被迫交出了所有金币才被放走。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}召唤了一场风暴！你的船翻了，金币沉入了深海。",
+          "你在{location}被{creature}扔进了大海，被海浪冲到荒岛上，金币全丢了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "wizard_tower",
+    "name": "巫师高塔",
+    "category": "mystery",
+    "rarity": "rare",
+    "weight": 4,
+    "conditions": { "minCharisma": 13 },
+    "locations": ["漂浮在空中的巫师塔", "被魔法结界笼罩的高塔", "隐藏在瀑布后的秘法塔"],
+    "creatures": ["失控的魔法傀儡", "疯癫的老巫师", "变形怪"],
+    "baseGoldMin": 80,
+    "baseGoldMax": 250,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}的魔法实验出了岔子，你用{raceTrait}稳定了法阵，巫师感激地给了你{treasure}！",
+          "{creature}在{location}设下的魔法谜题被你用{raceTrait}解开，隐藏的宝库里满是{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.6, "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}破解了{creature}的传送法阵，被传到了宝库中，拿到了{treasure}！",
+          "{location}的{creature}试图把你变成青蛙，你躲开了法术，顺走了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.25, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}小心翼翼地避开了{creature}的魔法陷阱，找到了{treasure}。",
+          "{location}的{creature}忙于实验，你趁机翻到了{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的魔法结界太强了，你只在塔外捡到了几个魔法金币。",
+          "{creature}在{location}的魔法扫帚到处乱飞，你躲闪时捡了点零钱。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}喝了一瓶不该喝的药水，醒来时发现金币被{creature}拿走了。",
+          "{creature}在{location}对你下了混淆咒，你稀里糊涂地把金币给了它。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}把你变成了金币磁铁——但磁力把金币全吸进了塔里的魔法熔炉！",
+          "你在{location}念错了一句咒语，引发了魔法爆炸，金币被炸成了灰烬。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "arena_fight",
+    "name": "角斗场",
+    "category": "social",
+    "rarity": "uncommon",
+    "weight": 6,
+    "conditions": { "minCharisma": 7 },
+    "locations": ["王都的荣耀角斗场", "地下城的黑市擂台", "兽人部落的试炼场"],
+    "creatures": ["连胜十场的冠军斗士", "被激怒的牛头怪", "神秘的蒙面剑客"],
+    "baseGoldMin": 50,
+    "baseGoldMax": 200,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}无人能敌——直到你来了！{raceTrait}助你一击制胜，全场观众为你欢呼，赏金是{treasure}！",
+          "{location}的{creature}号称不败，但你用{raceTrait}找到了破绽，赢得比赛和{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.5, "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "你在{location}与{creature}大战三回合，最终以技巧取胜，赢得{treasure}！",
+          "{location}的观众为你的战斗欢呼！你击败了{creature}，捧回了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}和{creature}打了个平手，但观众还是给了你不少赏金。",
+          "{location}的{creature}实力不俗，但你撑到了最后，拿到了参与奖。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "在{location}被{creature}揍得不轻，但好歹撑过了第一轮，拿到了出场费。",
+          "{location}的{creature}太强了，你只打了两个回合就认输，但观众还是给了点金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}一拳就把你打飞了，观众哈哈大笑，你的金币从口袋里飞了出来。",
+          "你在{location}挑战{creature}前忘了热身，输得很惨，还赔了报名费。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}把你打进了医务室！医药费花光了你的金币，三个月不能参赛。",
+          "你在{location}被{creature}打飞到了观众席，砸坏了贵族的晚餐，赔了一大笔钱。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "underdark_tunnel",
+    "name": "地下隧道",
+    "category": "dungeon",
+    "rarity": "rare",
+    "weight": 4,
+    "conditions": { "minCharisma": 12 },
+    "locations": ["幽暗地域的废弃隧道", "矮人古道的深处", "被遗忘的卓尔通道"],
+    "creatures": ["巨型地底蠕虫", "卓尔精灵斥候", "发光的蘑菇精"],
+    "baseGoldMin": 90,
+    "baseGoldMax": 280,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}最深处，{creature}守护着一片发光蘑菇林，你用{raceTrait}驯服了它，采到了{treasure}！",
+          "{creature}在{location}为你展示了地下的秘密通道，{raceTrait}让你获得了它的信任，找到了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.6, "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}用发光蘑菇引开了{creature}，成功通过了隧道，捡到了{treasure}！",
+          "{location}的{creature}被你的矿灯光晃了眼，你趁机从它巢穴里拿走了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.25, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}贴着墙壁悄悄经过了{creature}的领地，发现了{treasure}。",
+          "{location}的{creature}正在打盹，你轻手轻脚地拿到了{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}太黑了，你几乎什么都看不见，只在入口处摸到了几枚地下金币。",
+          "{creature}在{location}的动静太大了，你决定只在安全区域捡捡零钱。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}迷了路，{creature}闻声赶来，你慌乱逃跑中掉落了金币。",
+          "{location}的{creature}用粘液把你粘在了墙上，挣脱后才发现金币全被粘走了。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}发生了塌方！{creature}在混乱中抢走了你所有的金币和装备。",
+          "你在{location}中了{creature}的孢子毒气，昏迷了一整天，醒来金币全没了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "fairy_fountain",
+    "name": "仙女喷泉",
+    "category": "mystery",
+    "rarity": "uncommon",
+    "weight": 5,
+    "conditions": { "minCharisma": 9 },
+    "locations": ["森林深处的仙女喷泉", "月下花海的许愿池", "被魔法保护的圣泉"],
+    "creatures": ["泉水仙女", "爱恶作剧的小妖精", "守护许愿池的独角兽"],
+    "baseGoldMin": 40,
+    "baseGoldMax": 180,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "你在{location}投下了一枚金币许愿，{creature}被你用{raceTrait}打动，还了你一整池的{treasure}！",
+          "{creature}在{location}听了你的冒险故事，感动得落下眼泪——每一滴都变成了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.5, "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}帮{creature}清理了泉水中的落叶，她高兴地回赠了{treasure}！",
+          "{location}的{creature}心情很好，对你说了一个谜语，你答对后获得了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.25, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}向{creature}行了个礼，她笑着从水底捞出了{treasure}递给你。",
+          "{location}的泉水闪闪发光，{creature}示意你可以拿一些金币走。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{creature}在{location}忙着梳妆打扮，没空理你，你自己在池边捡了几枚金币。",
+          "你在{location}的泉水里洗了把脸，{creature}觉得你挺有礼貌，给了你一点金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}不小心踩坏了{creature}的花园！她被惹恼了，罚你赔了金币。",
+          "{location}的{creature}对你玩了个恶作剧，你被变成青蛙一小时，醒来金币少了。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "你在{location}向{creature}许了个很贪心的愿，泉水的祝福变成了诅咒，你的金币全沉进了池底。",
+          "{location}的{creature}今天心情极差，你的金币被施了漂浮术，全飞走了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "bandit_ambush",
+    "name": "强盗伏击",
+    "category": "wilderness",
+    "rarity": "common",
+    "weight": 8,
+    "locations": ["官道旁的密林", "山路上的隘口", "废弃哨塔下的峡谷"],
+    "creatures": ["蒙面强盗头子", "半兽人劫匪团", "狡猾的飞贼"],
+    "baseGoldMin": 30,
+    "baseGoldMax": 150,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{creature}在{location}拦住了你的去路，但你的{raceTrait}让他们胆寒，反而交出{treasure}求你放过他们！",
+          "你在{location}遭遇{creature}的埋伏，但用{raceTrait}反过来设下陷阱，缴获了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.5, "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}想抢你，但被你识破了计划，反手夺走了{treasure}！",
+          "你在{location}假装上当，{creature}傻乎乎地走进了你的圈套，你收走了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}察觉到{creature}的埋伏，及时躲开并找到了他们藏匿的{treasure}。",
+          "{creature}在{location}设了埋伏，但你绕开了陷阱，拿到了{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的{creature}人多势众，你只能偷偷摸走他们看管的几枚金币。",
+          "你在{location}被{creature}追了一阵，路上捡到了他们掉落的零钱。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}中了{creature}的埋伏！他们人多势众，你只能丢下金币逃命。",
+          "{creature}在{location}用计把你骗进了沟里，你的金币全被搜走了。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}把你绑在树上搜了个遍！金币、装备全没了。",
+          "你在{location}被{creature}下了蒙汗药，醒来后发现连鞋子都被偷走了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "mushroom_forest",
+    "name": "蘑菇森林",
+    "category": "wilderness",
+    "rarity": "uncommon",
+    "weight": 5,
+    "locations": ["发光的巨型蘑菇林", "孢子弥漫的蕈类洞穴", "蘑菇人部族的村落"],
+    "creatures": ["友善的蘑菇人长老", "巨型毒蘑菇怪", "飘浮的孢子精灵"],
+    "baseGoldMin": 45,
+    "baseGoldMax": 170,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}正在举办孢子丰收节，你用{raceTrait}赢得了蘑菇王大赛，奖品是{treasure}！",
+          "{creature}在{location}送你一袋孢子，你种下后一夜之间长出了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.5, "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "你在{location}帮{creature}赶走了害虫，它感激地把珍藏的{treasure}送给了你！",
+          "{location}的{creature}教了你分辨毒蘑菇的方法，你在林子里找到了值钱的{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}采摘到了能卖出好价钱的稀有蘑菇——{treasure}！",
+          "{location}的{creature}用蘑菇跟你换了东西，你发现其中有{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的蘑菇都在发光，但大多不值钱，你只采到了几朵药用的。",
+          "{creature}在{location}送了你一碗蘑菇汤——很好喝，但不值几个钱。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}吃了一朵不该吃的蘑菇！幻觉中你把金币全给了{creature}。",
+          "{location}的毒蘑菇让你的装备褪了色，维修费不菲。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}对你喷出了致幻孢子！你在幻觉中过了三天，金币被蘑菇人拿去堆肥了。",
+          "你在{location}踩爆了一朵价值连城的稀有蘑菇，{creature}让你赔得倾家荡产。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "royal_banquet",
+    "name": "皇家宴会",
+    "category": "social",
+    "rarity": "rare",
+    "weight": 3,
+    "conditions": { "minCharisma": 15 },
+    "locations": ["金碧辉煌的王宫大厅", "贵族的私人庄园", "国王的加冕典礼"],
+    "creatures": ["挑剔的国王陛下", "八卦的公爵夫人", "密谋造反的宫廷大臣"],
+    "baseGoldMin": 100,
+    "baseGoldMax": 350,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "在{location}，{creature}对你的英勇事迹早有耳闻，{raceTrait}让你在所有人面前大放异彩，国王当场赐予{treasure}！",
+          "{creature}在{location}想羞辱你，却被你用{raceTrait}完美化解，反而赢得了满堂喝彩和{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.7, "statusChance": 0.4
+      },
+      "great": {
+        "templates": [
+          "你在{location}的才艺表演让{creature}大吃一惊，高兴之下给了你{treasure}！",
+          "{location}的{creature}对你一见如故，私下给了你一份厚礼：{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.3, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}表现得体，{creature}对你的印象不错，赏了你一些金币。",
+          "{location}的宴会很无聊，但{creature}觉得你挺有趣，给了你{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "在{location}，{creature}让你坐在了最远的桌子，你只拿到了最低档的宴会红包。",
+          "{location}的社交礼仪太复杂了，你应付得满头大汗，只拿到了几枚礼节性金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}不小心用错了餐具，{creature}觉得你粗鲁不堪，扣了你的赏钱。",
+          "{location}的{creature}在宴会上揭了你的短，你羞愧难当，还被人顺走了金币。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "你在{location}打翻了国王的酒杯！{creature}勃然大怒，把你轰出了王宫，还罚了你的金币。",
+          "{location}的{creature}设局陷害你偷了王冠宝石，你赔光了金币才证明清白。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "market_pickpocket",
+    "name": "市集失窃",
+    "category": "town",
+    "rarity": "common",
+    "weight": 9,
+    "locations": ["熙熙攘攘的市集", "拥挤的港口交易区", "喧闹的地下黑市"],
+    "creatures": ["手艺高超的小偷", "伪装成商人的骗子", "神出鬼没的扒手团伙"],
+    "baseGoldMin": 15,
+    "baseGoldMax": 100,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{creature}在{location}偷了你的钱包就跑，但{raceTrait}让你瞬间追上，反手把他送进了卫兵营——还领了悬赏{treasure}！",
+          "你在{location}发现{creature}正在偷别人的东西，用{raceTrait}将他当场抓获，失主感激地送了你{treasure}。"
+        ],
+        "goldMult": 2.5, "itemChance": 0.4, "statusChance": 0.2
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}想偷你的口袋，被你一把抓住手腕，他求饶时塞给了你{treasure}。",
+          "你在{location}撞破了{creature}的盗窃团伙，哨兵赶到前你先搜走了他们的{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}感觉到有人摸你的口袋，及时护住了钱包，还在地上捡到了{treasure}。",
+          "{location}的{creature}盯上了你，但你警惕性很高，他只好空手而去——你反而在摊位上捡了漏。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}人太多了，你发现口袋被划了个口子，但好在只丢了几枚铜板。",
+          "{creature}在{location}趁乱撞了你一下，你回家才发现零钱包不见了。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}用一个假摊位骗了你！你花大价钱买了块「魔法宝石」，结果是块染了色的玻璃。",
+          "你在{location}被{creature}偷走了钱袋！等你发现时，小偷已经消失在人群中了。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}是个扒手大师！你的金币、装备甚至鞋带都被偷走了，你光着脚追了三条街也没追上。",
+          "你在{location}中了{creature}的连环骗局，把全部金币投进了一个「稳赚不赔」的生意——第二天摊位和人全消失了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "cliff_rockfall",
+    "name": "悬崖遇险",
+    "category": "wilderness",
+    "rarity": "uncommon",
+    "weight": 7,
+    "locations": ["陡峭的山崖小径", "碎石滚落的山坡", "风化严重的峡谷栈道"],
+    "creatures": ["突如其来的落石", "盘踞山崖的石像鬼", "受惊的野生狮鹫"],
+    "baseGoldMin": 20,
+    "baseGoldMax": 120,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{location}的{creature}向你砸来，{raceTrait}让你在千钧一发之际跳到了安全地带，还在石缝里发现了{treasure}！",
+          "你在{location}遭遇山崩，用{raceTrait}在山壁上凿出了落脚点，意外闯入了一个藏宝洞，获得了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.5, "statusChance": 0.2
+      },
+      "great": {
+        "templates": [
+          "你在{location}躲过了{creature}的袭击，滚落的石头反而砸开了一处矿脉，露出了{treasure}！",
+          "{location}的{creature}引发了落石，你巧妙闪避后在碎石堆里找到了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}小心翼翼地通过了{creature}活跃的区域，平安无事还捡到了前人掉落的金币。",
+          "{location}的{creature}让道路变得危险，但你找到了绕行的安全路线，还发现了{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "你在{location}被{creature}吓得腿软，只能贴着崖壁慢慢挪过去，只捡到了几枚被风吹来的铜板。",
+          "{location}今天格外危险，你只在安全区域匆匆搜刮了一下就撤退了。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}脚下一滑！虽然没有摔下去，但背包里的金币全滚进了深渊。",
+          "{creature}在{location}把你逼到了崖边，你不得不把金币扔出去分散注意力才脱身。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}发生了大规模山崩！你被{creature}追得滚下了山坡，虽然保住了命，但金币和装备散落了一路。",
+          "你在{location}失足滑下了悬崖！幸运地被树枝挂住，不幸的是金币袋掉进了万丈深渊。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "tavern_brawl",
+    "name": "酒馆斗殴",
+    "category": "social",
+    "rarity": "common",
+    "weight": 8,
+    "locations": ["烟雾缭绕的矮人酒馆", "水手聚集的港口酒吧", "佣兵常驻的地下酒馆"],
+    "creatures": ["喝醉了的半兽人佣兵", "脾气暴躁的矮人铁匠", "输了钱来找茬的赌徒"],
+    "baseGoldMin": 10,
+    "baseGoldMax": 90,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{creature}在{location}向你扔来一把椅子，{raceTrait}让你优雅地接住并反手放倒了他！全场酒客为你欢呼，酒馆老板免了你的单还送了{treasure}！",
+          "你在{location}用{raceTrait}化解了一场大战，把斗殴变成了掰手腕比赛——你赢走了所有人的赌注：{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.4, "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}挥舞着酒瓶冲过来，你灵巧地躲开并让他撞进了酒桶里，围观者大笑着往你手里塞了{treasure}。",
+          "你在{location}接住了{creature}扔来的飞刀——用牙齿！全场震惊，赏了你{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}和{creature}扭打在一起，最后双方各退一步，酒馆老板为了感谢你没砸坏太多东西，给了你一点金币。",
+          "{location}的{creature}想找你麻烦，你请他喝了一杯，他不好意思地拍了拍你的肩膀走了。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "在{location}被卷入了一场群架，你躲到了桌子底下，架打完后在地上捡了几枚滚落的金币。",
+          "{creature}在{location}打架时撞翻了你，你从地上爬起来发现口袋里多了几枚别人的金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{creature}在{location}一拳打在你脸上！你鼻血直流，还被酒馆老板要求赔偿砸坏的桌椅。",
+          "你在{location}被{creature}扔出了窗外！掉进了街上的泥坑里，金币也从口袋里飞了出去。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}爆发了大规模群架！{creature}抄起了板凳，你被卷进去打得鼻青脸肿，醒来发现金币全被趁乱摸走了。",
+          "你在{location}被{creature}灌醉后签了张巨额欠条，第二天醒来发现金币全被扣光了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "cursed_artifact",
+    "name": "诅咒遗物",
+    "category": "mystery",
+    "rarity": "uncommon",
+    "weight": 6,
+    "locations": ["古董商的神秘后屋", "被诅咒的废弃神殿", "闹鬼的古董店"],
+    "creatures": ["附着怨灵的古老戒指", "会说话的诅咒人偶", "吸食金币的贪婪魔镜"],
+    "baseGoldMin": 25,
+    "baseGoldMax": 140,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{creature}在{location}试图附身于你，但{raceTrait}让你的意志坚不可摧，反过来净化了诅咒——怨灵安息时留下了{treasure}！",
+          "你在{location}用{raceTrait}识破了{creature}的诅咒，不仅毫发无伤，还从诅咒容器中解放了{treasure}！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.5, "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{creature}在{location}的诅咒差点让你中招，但你及时破解了谜题，被封印的宝箱里装着{treasure}！",
+          "你在{location}发现{creature}实际上是个被诅咒的可怜灵魂，解救了它之后获得了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}察觉到{creature}有问题，小心地避开了诅咒，还在附近找到了{treasure}。",
+          "{location}的{creature}散发着一股不祥的气息，你没有碰它，但顺手拿走了旁边的{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的{creature}让你毛骨悚然，你只在入口处匆匆扫了几眼就撤退了。",
+          "你在{location}碰了一下{creature}，手指发麻了一整天——不过也捡到了几枚金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "你在{location}不小心触发了{creature}的诅咒！你的金币开始自己往外蹦，你抓都抓不住。",
+          "{creature}在{location}对你下了一个恶咒——你的钱包莫名其妙变轻了。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}的{creature}发动了最强诅咒！你的金币全变成了石头，你在神殿里哭了一整夜。",
+          "你在{location}被{creature}的诅咒困了三天，醒来时发现自己把金币全喂给了一面会说话的魔镜。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  },
+  {
+    "id": "sinking_ship",
+    "name": "沉船逃生",
+    "category": "wilderness",
+    "rarity": "rare",
+    "weight": 5,
+    "conditions": { "minCharisma": 10 },
+    "locations": ["暴风雨中的商船", "触礁的远洋帆船", "被海怪攻击的渡轮"],
+    "creatures": ["愤怒的风暴之灵", "巨型章鱼海怪", "趁火打劫的海盗"],
+    "baseGoldMin": 40,
+    "baseGoldMax": 200,
+    "outcomes": {
+      "legendary": {
+        "templates": [
+          "{location}正在沉没！{creature}堵住了逃生的路，但{raceTrait}让你在船舱里发现了被遗忘的船长宝藏：{treasure}！你抱着它跳上了最后一条救生艇。",
+          "你在{location}与{creature}搏斗时撞开了船长室的门，发现了一整箱{treasure}——原来这艘船是走私船！"
+        ],
+        "goldMult": 2.5, "itemChance": 0.6, "statusChance": 0.3
+      },
+      "great": {
+        "templates": [
+          "{location}的船正在进水！你帮船员堵住了漏洞，船长感激地给了你{treasure}。",
+          "你在{location}遭遇{creature}时拉响了警报，全船的人一起击退了它，你分到了{treasure}。"
+        ],
+        "goldMult": 1.8, "itemChance": 0.2, "statusChance": 0
+      },
+      "success": {
+        "templates": [
+          "你在{location}的混乱中保持冷静，帮几位乘客上了救生艇，他们凑钱给了你一笔谢礼。",
+          "{location}的{creature}造成了恐慌，但你找到了一条安全的逃生路线，还在路上捡到了{treasure}。"
+        ],
+        "goldMult": 1.0, "itemChance": 0, "statusChance": 0
+      },
+      "minor": {
+        "templates": [
+          "{location}的船快沉了！你手忙脚乱地跳上了救生艇，只来得及抓了一把零钱。",
+          "在{location}，{creature}把船搅得天翻地覆，你躲在救生艇下面捡了几枚别人掉落的金币。"
+        ],
+        "goldMult": 0.6, "itemChance": 0, "statusChance": 0
+      },
+      "fail": {
+        "templates": [
+          "{location}的船翻了！你在海里泡了一个小时才被救起，金币全沉了底。",
+          "{creature}在{location}趁乱抢走了你的行李——包括你的金币袋。"
+        ],
+        "goldMult": 0, "itemChance": 0, "statusChance": 0.15
+      },
+      "disaster": {
+        "templates": [
+          "{location}发生了海难！{creature}把船撕成了两半，你抱着木板漂到了荒岛上——金币和装备全都喂了鱼。",
+          "你在{location}被{creature}拖进了深海！虽然奇迹般生还，但浑身金币被海底暗流卷走了。"
+        ],
+        "goldMult": -0.3, "itemChance": 0, "statusChance": 0.3
+      }
+    }
+  }
+]
