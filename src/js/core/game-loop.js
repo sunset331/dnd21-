@@ -1,6 +1,7 @@
 // game-loop.js — 核心循环：Idle ↔ Adventure
 
 import { Audio } from '../audio.js';
+import { OPS_BASE_REQUIREMENT, AUTO_ADVENTURE_INTERVAL_MS, BONUS_OPS_PER_CLICK } from '../config.js';
 
 const STATE = {
   IDLE: 'idle',
@@ -26,7 +27,7 @@ export class GameLoop {
     this.state = STATE.IDLE;
     this.inputTracker.onAdventureTrigger = () => this.triggerAdventure();
     const effects = this.character.getStatusEffects();
-    const baseOps = 300 - effects.opsDiscount;
+    const baseOps = OPS_BASE_REQUIREMENT - effects.opsDiscount;
     this.inputTracker.setOpsRequirement(baseOps);
     this.ui.renderIdle();
   }
@@ -37,7 +38,7 @@ export class GameLoop {
     this.autoMode = true;
     this.autoInterval = setInterval(() => {
       if (this.state === STATE.IDLE) this.triggerAdventure();
-    }, 60000);
+    }, AUTO_ADVENTURE_INTERVAL_MS);
     // 立即触发第一次
     if (this.state === STATE.IDLE) this.triggerAdventure();
   }
@@ -86,7 +87,7 @@ export class GameLoop {
 
     // 回到空闲
     const effects = this.character.getStatusEffects();
-    const baseOps = 300 - effects.opsDiscount;
+    const baseOps = OPS_BASE_REQUIREMENT - effects.opsDiscount;
     this.inputTracker.setOpsRequirement(baseOps);
 
     this.state = STATE.IDLE;
@@ -96,7 +97,7 @@ export class GameLoop {
   // 点击宠物获得额外操作
   onPetClick() {
     if (this.state !== STATE.IDLE) return;
-    this.inputTracker.addBonusOps(5);
+    this.inputTracker.addBonusOps(BONUS_OPS_PER_CLICK);
     this.ui.flashProgress();
   }
 

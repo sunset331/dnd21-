@@ -1,6 +1,7 @@
 // ui.js — DOM 渲染、动画、弹窗
 
 import { DICE } from './core/dice.js';
+import { POPUP_AUTO_DISMISS_MS, NOTIFICATION_DURATION_MS, PARTICLE_DURATION_MS } from './config.js';
 
 export class UI {
   constructor() {
@@ -50,7 +51,7 @@ export class UI {
       p.style.setProperty('--drift', (Math.random() - 0.5) * 80 + 'px');
       p.style.animationDelay = Math.random() * 0.3 + 's';
       document.body.appendChild(p);
-      setTimeout(() => p.remove(), 1800);
+      setTimeout(() => p.remove(), PARTICLE_DURATION_MS);
     }
   }
 
@@ -127,7 +128,7 @@ export class UI {
       this.popupDismiss.addEventListener('click', handler);
       setTimeout(() => {
         if (!this.popupOverlay.classList.contains('hidden')) handler();
-      }, 8000);
+      }, POPUP_AUTO_DISMISS_MS);
     });
   }
 
@@ -136,7 +137,7 @@ export class UI {
     el.className = 'float-text';
     el.textContent = text;
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 2500);
+    setTimeout(() => el.remove(), NOTIFICATION_DURATION_MS);
   }
 
   _sleep(ms) {

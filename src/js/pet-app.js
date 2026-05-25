@@ -11,6 +11,7 @@ import { UI } from './ui.js';
 import { SaveManager } from './storage/save-manager.js';
 
 import { loadJSON } from './storage/loader.js';
+import { esc } from './utils/escape-html.js';
 
 async function boot() {
   const [racesData, eventsData, equipmentData, statusesData,
@@ -232,7 +233,7 @@ function setupContextMenu(gameLoop, character, saveManager, renderer, racesData,
         validSlots.forEach(s => {
           const btn = document.createElement('button');
           btn.className = 'slot-switch-btn';
-          btn.innerHTML = `<span>${s.id}. ${s.name || '无名'}</span>${s.active ? '<small>(当前)</small>' : ''}`;
+          btn.innerHTML = `<span>${esc(s.id)}. ${esc(s.name || '无名')}</span>${s.active ? '<small>(当前)</small>' : ''}`;
           btn.addEventListener('click', async () => {
             overlay.remove();
             if (s.id !== saveManager.activeSlot) {
@@ -281,7 +282,7 @@ function showCharacterCreate(racesData, presetsData, equipmentData, character, o
     const r = racesData[preset.race];
     const btn = document.createElement('button');
     btn.className = 'preset-option';
-    btn.innerHTML = `<span class="preset-emoji">${r.emoji}</span>${preset.name}`;
+    btn.innerHTML = `<span class="preset-emoji">${esc(r.emoji)}</span>${esc(preset.name)}`;
     btn.addEventListener('click', () => {
       presetList.querySelectorAll('.preset-option').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected'); selectedPreset = id;
@@ -327,6 +328,6 @@ function applyTheme(themeId, cosmeticsData) {
 }
 
 boot().catch(err => {
-  console.error('[DND-PET] Boot failed:', err.message, err.stack);
-  document.body.innerHTML = `<div style="color:#c0392b;padding:20px;font-size:12px;">启动失败: ${err.message}<br><pre style="font-size:9px;">${err.stack||''}</pre></div>`;
+  console.error('[DND-PET] Boot failed:', err);
+  document.body.innerHTML = `<div style="color:#c0392b;padding:20px;font-size:12px;">启动失败，请重启应用。</div>`;
 });

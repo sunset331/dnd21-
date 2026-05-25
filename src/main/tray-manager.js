@@ -1,5 +1,5 @@
 // tray-manager.js — 系统托盘
-const { Tray, Menu, nativeImage } = require('electron');
+const { app, Tray, Menu, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -41,7 +41,7 @@ function create() {
     { type: 'separator' },
     { label: '退出', click: () => {
       if (stopActivityFn) stopActivityFn();
-      require('electron').app.exit(0);
+      app.quit();
     }}
   ]);
   tray.setContextMenu(contextMenu);
