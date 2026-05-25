@@ -1,0 +1,14 @@
+{
+  "id": "weapon_uncommon_01",
+  "name": "精灵细剑",
+  "slot": "weapon",
+  "rarity": "uncommon",
+  "price": 800,
+  "bonuses": {
+    "charisma": 2,
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "剑身纤细如柳叶，精灵工匠的得意之作。",
+  "icon": "⚔️"
+}

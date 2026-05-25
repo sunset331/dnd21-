@@ -1,0 +1,13 @@
+{
+  "id": "cloak_uncommon_01",
+  "name": "森林斗篷",
+  "slot": "cloak",
+  "rarity": "uncommon",
+  "price": 550,
+  "bonuses": {
+    "luck": 2
+  },
+  "specialEffect": null,
+  "flavor": "精灵织造的斗篷，在林间行走时几乎看不见。",
+  "icon": "🌿"
+}

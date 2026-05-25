@@ -1,0 +1,13 @@
+{
+  "id": "boots_common_01",
+  "name": "皮靴",
+  "slot": "boots",
+  "rarity": "common",
+  "price": 160,
+  "bonuses": {
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "一双结实的旅行皮靴，鞋底已经磨薄了。",
+  "icon": "👢"
+}

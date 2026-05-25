@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冒险者面板</title>
+  <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+  <div id="panel-window">
+    <!-- 拖动把手 -->
+    <div id="panel-drag-handle"></div>
+    <!-- 顶部 Tab -->
+    <div id="tab-bar">
+      <button class="tab-btn active" data-tab="character">🧑 角色</button>
+      <button class="tab-btn" data-tab="equipment">⚔️ 装备</button>
+      <button class="tab-btn" data-tab="shop">🛒 商城</button>
+      <button class="tab-btn" data-tab="inventory">🎒 背包</button>
+      <button class="tab-btn" data-tab="cosmetics">🎨 外观</button>
+      <button class="tab-btn" data-tab="log">📜 日志</button>
+      <button class="tab-btn" data-tab="achievements">🏆 成就</button>
+      <button class="tab-btn" data-tab="stats">📊 统计</button>
+      <button class="tab-btn" data-tab="settings">⚙️ 设置</button>
+      <button id="btn-close-panel" title="返回冒险界面">✕</button>
+    </div>
+
+    <!-- Tab 内容 -->
+    <div id="tab-content">
+      <!-- 角色面板 -->
+      <div id="tab-character" class="tab-panel active">
+        <div id="char-header">
+          <span id="panel-char-emoji">🧑</span>
+          <div>
+            <h3 id="panel-char-name">无名冒险者</h3>
+            <p id="panel-char-race">人类</p>
+          </div>
+        </div>
+        <div id="char-stats">
+          <div class="stat-row"><span>💰 金币</span><span id="panel-gold">100</span></div>
+          <div class="stat-row"><span>✨ 魅力</span><span id="panel-charisma">5</span></div>
+          <div class="stat-row"><span>🍀 幸运</span><span id="panel-luck">5</span></div>
+          <div class="stat-row"><span>📊 冒险次数</span><span id="panel-adventures">0</span></div>
+          <div class="stat-row"><span>✅ 成功率</span><span id="panel-success-rate">--</span></div>
+          <div class="stat-row"><span>⭐ 传奇次数</span><span id="panel-crits">0</span></div>
+          <div class="stat-row"><span>💀 失败次数</span><span id="panel-fails">0</span></div>
+        </div>
+        <div id="char-statuses">
+          <h4>当前状态</h4>
+          <div id="status-list"></div>
+        </div>
+      </div>
+
+      <!-- 装备面板 -->
+      <div id="tab-equipment" class="tab-panel">
+        <div id="equipment-slots"></div>
+      </div>
+
+      <!-- 商城面板 -->
+      <div id="tab-shop" class="tab-panel">
+        <div id="shop-gold">💰 <span id="shop-gold-amount">0</span></div>
+        <div class="shop-section-label">⚔️ 装备 <span class="shop-section-hint">每日特价8折</span></div>
+        <div id="shop-equipment"></div>
+        <div class="shop-section-label">🧪 消耗品</div>
+        <div id="shop-consumables"></div>
+      </div>
+
+      <!-- 背包 / 消耗品 -->
+      <div id="tab-inventory" class="tab-panel">
+        <div id="inventory-gold">💰 <span id="inv-gold-amount">0</span></div>
+        <div id="consumable-list"></div>
+      </div>
+
+      <!-- 冒险日志 -->
+      <div id="tab-log" class="tab-panel">
+        <div id="log-entries"></div>
+      </div>
+
+      <!-- 外观 -->
+      <div id="tab-cosmetics" class="tab-panel">
+        <div class="shop-section-label">🧑 角色皮肤</div>
+        <div id="cosmetic-skins"></div>
+        <div class="shop-section-label">🎨 窗口主题</div>
+        <div id="cosmetic-themes"></div>
+        <div class="shop-section-label">✨ 粒子特效</div>
+        <div id="cosmetic-particles"></div>
+      </div>
+
+      <!-- 成就 -->
+      <div id="tab-achievements" class="tab-panel">
+        <div id="achievement-categories"></div>
+      </div>
+
+      <!-- 统计 -->
+      <div id="tab-stats" class="tab-panel">
+        <div id="stats-dashboard"></div>
+      </div>
+
+      <!-- 设置 -->
+      <div id="tab-settings" class="tab-panel">
+        <div class="setting-row">
+          <span>🔊 音效</span>
+          <button id="setting-sound-toggle" class="setting-toggle">开启</button>
+        </div>
+        <div class="setting-row">
+          <span>⏱️ 活动速率</span>
+          <select id="setting-activity-rate">
+            <option value="12">慢 (12ops/分 ~25分/次)</option>
+            <option value="24" selected>正常 (24ops/分 ~12分/次)</option>
+            <option value="48">快 (48ops/分 ~6分/次)</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <span>📌 记住窗口位置</span>
+          <button id="setting-save-position" class="mode-btn" style="padding:4px 12px;font-size:11px;">保存当前位置</button>
+        </div>
+        <div class="setting-row">
+          <span>🗑️ 重置所有数据</span>
+          <button id="setting-reset" class="mode-btn" style="padding:4px 12px;font-size:11px;background:#ff4466;color:white;border:none;">重置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/panel-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "id": "necklace_uncommon_01",
+  "name": "琥珀吊坠",
+  "slot": "necklace",
+  "rarity": "uncommon",
+  "price": 550,
+  "bonuses": {
+    "charisma": 2
+  },
+  "specialEffect": null,
+  "flavor": "琥珀里封着一片来自远古森林的树叶。",
+  "icon": "🧿"
+}

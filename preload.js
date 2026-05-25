@@ -1,19 +1,32 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  getSettings: () => ipcRenderer.invoke('settings:get'),
-  saveSettings: (data) => ipcRenderer.invoke('settings:save', data),
-  mergeSettings: (partial) => ipcRenderer.invoke('settings:merge', partial),
-  setAlwaysOnTop: (on) => ipcRenderer.send('window:set-always-on-top', on),
-  setOpacity: (val) => ipcRenderer.send('window:set-opacity', val),
-  setScale: (val) => ipcRenderer.send('window:set-scale', val),
-  getCursorNear: () => ipcRenderer.invoke('ghost:cursor-near'),
-  toggleVisibility: () => ipcRenderer.send('window:toggle-vis'),
-  quitApp: () => ipcRenderer.send('app:quit'),
-  onTrayAction: (callback) => {
-    ipcRenderer.on('tray:stage1', () => callback('stage1'));
-    ipcRenderer.on('tray:stage2', () => callback('stage2'));
-    ipcRenderer.on('tray:mute', () => callback('mute'));
-    ipcRenderer.on('tray:settings', () => callback('settings'));
-  },
+  // Save/Load (multi-slot)
+  saveGame: (data, slot) => ipcRenderer.invoke('save-game', data, slot),
+  loadGame: (slot) => ipcRenderer.invoke('load-game', slot),
+  getSaveSlots: () => ipcRenderer.invoke('get-save-slots'),
+  deleteSave: (slot) => ipcRenderer.invoke('delete-save', slot),
+
+  // Panel window
+  openPanel: () => ipcRenderer.send('open-panel'),
+
+  // Notifications
+  onActivityTick: (callback) => ipcRenderer.on('activity-tick', (_, ops) => callback(ops)),
+  removeActivityListener: () => ipcRenderer.removeAllListeners('activity-tick'),
+
+  // Consumable sync: panel → pet
+  sendConsumableEffect: (effect) => ipcRenderer.send('consumable-effect', effect),
+  onConsumableEffect: (callback) => ipcRenderer.on('consumable-effect', (_, effect) => callback(effect)),
+  removeConsumableListener: () => ipcRenderer.removeAllListeners('consumable-effect'),
+
+  // Tray
+  onTrayAutoToggle: (callback) => ipcRenderer.on('tray-auto-toggle', (_, checked) => callback(checked)),
+
+  // Settings
+  saveWindowPosition: () => ipcRenderer.invoke('save-window-position'),
+  getActivityRate: () => ipcRenderer.invoke('get-activity-rate'),
+  saveSettings: (settings) => ipcRenderer.invoke('save-settings', settings),
+
+  // System
+  getAppVersion: () => ipcRenderer.invoke('get-version')
 });

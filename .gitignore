@@ -1,5 +1,9 @@
 node_modules/
-.vscode/
-dist/
+saves/
+output/
 *.log
+.DS_Store
+Thumbs.db
+dist/
 *.zip
+project/

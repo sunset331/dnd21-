@@ -1,0 +1,13 @@
+{
+  "id": "cloak_common_01",
+  "name": "麻布披风",
+  "slot": "cloak",
+  "rarity": "common",
+  "price": 140,
+  "bonuses": {
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "一件朴素的旅行披风，沾满了路上的尘土。",
+  "icon": "🧣"
+}

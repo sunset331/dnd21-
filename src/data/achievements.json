@@ -1,0 +1,114 @@
+[
+  {
+    "id": "first_step",
+    "name": "第一步",
+    "icon": "👣",
+    "desc": "完成第一次冒险",
+    "check": { "type": "stat", "field": "totalAdventures", "min": 1 }
+  },
+  {
+    "id": "adventurer_10",
+    "name": "初级冒险者",
+    "icon": "⚔️",
+    "desc": "完成10次冒险",
+    "check": { "type": "stat", "field": "totalAdventures", "min": 10 }
+  },
+  {
+    "id": "adventurer_100",
+    "name": "资深冒险者",
+    "icon": "🛡️",
+    "desc": "完成100次冒险",
+    "check": { "type": "stat", "field": "totalAdventures", "min": 100 }
+  },
+  {
+    "id": "adventurer_1000",
+    "name": "传奇冒险者",
+    "icon": "👑",
+    "desc": "完成1000次冒险",
+    "check": { "type": "stat", "field": "totalAdventures", "min": 1000 }
+  },
+  {
+    "id": "gold_1000",
+    "name": "小有积蓄",
+    "icon": "💰",
+    "desc": "累计获得1000金币",
+    "check": { "type": "achievement", "field": "totalGoldEarnedLifetime", "min": 1000 }
+  },
+  {
+    "id": "gold_10000",
+    "name": "富甲一方",
+    "icon": "💎",
+    "desc": "累计获得10000金币",
+    "check": { "type": "achievement", "field": "totalGoldEarnedLifetime", "min": 10000 }
+  },
+  {
+    "id": "gold_100000",
+    "name": "金币满仓",
+    "icon": "🏦",
+    "desc": "累计获得100000金币",
+    "check": { "type": "achievement", "field": "totalGoldEarnedLifetime", "min": 100000 }
+  },
+  {
+    "id": "double_crit",
+    "name": "好运连连",
+    "icon": "✨",
+    "desc": "连续2次传奇成功",
+    "check": { "type": "achievement", "field": "maxCritsInARow", "min": 2 }
+  },
+  {
+    "id": "triple_crit",
+    "name": "命运宠儿",
+    "icon": "🌟",
+    "desc": "连续3次传奇成功",
+    "check": { "type": "achievement", "field": "maxCritsInARow", "min": 3 }
+  },
+  {
+    "id": "rare_hunter_5",
+    "name": "稀有猎人",
+    "icon": "🎯",
+    "desc": "获得5件史诗或传说装备",
+    "check": { "type": "achievement", "field": "rareItemsFound", "min": 5 }
+  },
+  {
+    "id": "rare_hunter_20",
+    "name": "传说收集者",
+    "icon": "🏆",
+    "desc": "获得20件史诗或传说装备",
+    "check": { "type": "achievement", "field": "rareItemsFound", "min": 20 }
+  },
+  {
+    "id": "shopaholic",
+    "name": "购物狂",
+    "icon": "🛍️",
+    "desc": "在商城消费5000金币",
+    "check": { "type": "stat", "field": "totalSpent", "min": 5000 }
+  },
+  {
+    "id": "event_explorer",
+    "name": "事件探索者",
+    "icon": "🗺️",
+    "desc": "触发过所有不同类型的冒险事件",
+    "check": { "type": "custom", "field": "eventsSeen", "min": 10 }
+  },
+  {
+    "id": "survivor",
+    "name": "大难不死",
+    "icon": "💀",
+    "desc": "从连续5次失败中活下来",
+    "check": { "type": "custom", "field": "surviveStreak" }
+  },
+  {
+    "id": "first_equipment",
+    "name": "换装新手",
+    "icon": "🎩",
+    "desc": "装备第一件物品",
+    "check": { "type": "custom", "field": "firstEquipment" }
+  },
+  {
+    "id": "full_equipped",
+    "name": "全副武装",
+    "icon": "🦾",
+    "desc": "填满全部7个装备槽",
+    "check": { "type": "custom", "field": "fullEquipped" }
+  }
+]

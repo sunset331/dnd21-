@@ -1,0 +1,13 @@
+{
+  "id": "necklace_common_01",
+  "name": "麻绳项链",
+  "slot": "necklace",
+  "rarity": "common",
+  "price": 120,
+  "bonuses": {
+    "charisma": 1
+  },
+  "specialEffect": null,
+  "flavor": "一根麻绳串着一颗光滑的河卵石。",
+  "icon": "📿"
+}

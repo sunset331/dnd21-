@@ -1,0 +1,14 @@
+{
+  "id": "ring_rare_01",
+  "name": "幸运兔脚戒",
+  "slot": "ring",
+  "rarity": "rare",
+  "price": 1800,
+  "bonuses": {
+    "luck": 3,
+    "charisma": 1
+  },
+  "specialEffect": null,
+  "flavor": "别问兔子后来怎么样了。",
+  "icon": "🐰"
+}

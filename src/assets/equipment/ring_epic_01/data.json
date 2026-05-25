@@ -1,0 +1,14 @@
+{
+  "id": "ring_epic_01",
+  "name": "贤者之戒",
+  "slot": "ring",
+  "rarity": "epic",
+  "price": 5000,
+  "bonuses": {
+    "luck": 4,
+    "charisma": 2
+  },
+  "specialEffect": null,
+  "flavor": "戴上它，你能听见远方智者的低语。",
+  "icon": "🔮"
+}

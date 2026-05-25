@@ -1,0 +1,37 @@
+{
+  "human": {
+    "name": "人类",
+    "emoji": "🧑",
+    "bonus": { "charisma": 2, "luck": 2 },
+    "trait": "坚韧的意志",
+    "desc": "均衡的种族，适应性最强，没有明显短板。"
+  },
+  "elf": {
+    "name": "精灵",
+    "emoji": "🧝",
+    "bonus": { "charisma": 4, "luck": 1 },
+    "trait": "优雅的感知",
+    "desc": "魅力超群，金币收益更高，但运气稍逊。"
+  },
+  "dwarf": {
+    "name": "矮人",
+    "emoji": "⛏️",
+    "bonus": { "charisma": 1, "luck": 3, "goldFind": 10 },
+    "trait": "矿工的直觉",
+    "desc": "寻宝专家，额外金币概率+10%，暴击率更高。"
+  },
+  "goblin": {
+    "name": "哥布林",
+    "emoji": "👺",
+    "bonus": { "charisma": 0, "luck": 5, "chaosResist": true },
+    "trait": "混沌的狡黠",
+    "desc": "极致赌徒，幸运最高但魅力为零，免疫部分负面状态。"
+  },
+  "dragonborn": {
+    "name": "龙裔",
+    "emoji": "🐲",
+    "bonus": { "charisma": 5, "luck": 0, "fireResist": true },
+    "trait": "龙族的威严",
+    "desc": "魅力最高，金币倍率稳定，但幸运最低难出暴击。"
+  }
+}

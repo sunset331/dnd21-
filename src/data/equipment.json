@@ -1,0 +1,43 @@
+{
+  "hat_common_01": { "id": "hat_common_01", "name": "皮帽", "slot": "hat", "rarity": "common", "price": 150, "bonuses": { "charisma": 1 }, "flavor": "一顶普通的皮帽，至少能遮风挡雨。", "icon": "🎩" },
+  "hat_uncommon_01": { "id": "hat_uncommon_01", "name": "冒险者宽檐帽", "slot": "hat", "rarity": "uncommon", "price": 600, "bonuses": { "charisma": 2 }, "flavor": "帽檐上别着一根不知名鸟类的羽毛。", "icon": "🤠" },
+  "hat_rare_01": { "id": "hat_rare_01", "name": "秘银头环", "slot": "hat", "rarity": "rare", "price": 2000, "bonuses": { "charisma": 3, "luck": 1 }, "flavor": "秘银的光泽在月光下微微发亮。", "icon": "👑" },
+  "hat_epic_01": { "id": "hat_epic_01", "name": "龙眼冠冕", "slot": "hat", "rarity": "epic", "price": 6000, "bonuses": { "charisma": 4, "luck": 2 }, "flavor": "冠冕上镶嵌的龙眼宝石会随心情变换颜色。", "icon": "💎" },
+  "hat_legendary_01": { "id": "hat_legendary_01", "name": "命运王冠", "slot": "hat", "rarity": "legendary", "price": 15000, "bonuses": { "charisma": 5, "luck": 3 }, "specialEffect": { "type": "extraRoll", "chance": 0.15, "desc": "15%概率额外骰一次，取高值" }, "flavor": "据说戴上它的人能看见命运的丝线。", "icon": "✨" },
+
+  "weapon_common_01": { "id": "weapon_common_01", "name": "短剑", "slot": "weapon", "rarity": "common", "price": 200, "bonuses": { "charisma": 1, "luck": 0 }, "flavor": "一把朴素的铁剑，剑柄缠着旧布条。", "icon": "🗡️" },
+  "weapon_uncommon_01": { "id": "weapon_uncommon_01", "name": "精灵细剑", "slot": "weapon", "rarity": "uncommon", "price": 800, "bonuses": { "charisma": 2, "luck": 1 }, "flavor": "剑身纤细如柳叶，精灵工匠的得意之作。", "icon": "⚔️" },
+  "weapon_rare_01": { "id": "weapon_rare_01", "name": "矮人战斧", "slot": "weapon", "rarity": "rare", "price": 2500, "bonuses": { "charisma": 2, "luck": 2 }, "flavor": "斧刃上刻着矮人族的战斗祷文。", "icon": "🪓" },
+  "weapon_epic_01": { "id": "weapon_epic_01", "name": "龙牙长枪", "slot": "weapon", "rarity": "epic", "price": 7000, "bonuses": { "charisma": 3, "luck": 3 }, "flavor": "用成年红龙的牙齿锻造，枪尖永远温热。", "icon": "🔱" },
+  "weapon_legendary_01": { "id": "weapon_legendary_01", "name": "裁决之刃", "slot": "weapon", "rarity": "legendary", "price": 18000, "bonuses": { "charisma": 5, "luck": 4 }, "specialEffect": { "type": "failShield", "chance": 0.25, "desc": "25%概率免疫大失败" }, "flavor": "这把剑只会被真正的英雄举起——或者特别幸运的骗子。", "icon": "🔥" },
+
+  "ring_common_01": { "id": "ring_common_01", "name": "铜戒指", "slot": "ring", "rarity": "common", "price": 100, "bonuses": { "luck": 1 }, "flavor": "一枚简单的铜环，内侧刻着模糊的字迹。", "icon": "💍" },
+  "ring_uncommon_01": { "id": "ring_uncommon_01", "name": "月光石戒指", "slot": "ring", "rarity": "uncommon", "price": 500, "bonuses": { "luck": 2 }, "flavor": "月光石在夜晚会发出柔和的蓝色光芒。", "icon": "💠" },
+  "ring_rare_01": { "id": "ring_rare_01", "name": "幸运兔脚戒", "slot": "ring", "rarity": "rare", "price": 1800, "bonuses": { "luck": 3, "charisma": 1 }, "flavor": "别问兔子后来怎么样了。", "icon": "🐰" },
+  "ring_epic_01": { "id": "ring_epic_01", "name": "贤者之戒", "slot": "ring", "rarity": "epic", "price": 5000, "bonuses": { "luck": 4, "charisma": 2 }, "flavor": "戴上它，你能听见远方智者的低语。", "icon": "🔮" },
+  "ring_legendary_01": { "id": "ring_legendary_01", "name": "命运双生戒", "slot": "ring", "rarity": "legendary", "price": 12000, "bonuses": { "luck": 5, "charisma": 3 }, "specialEffect": { "type": "goldReroll", "chance": 0.2, "desc": "20%概率金币重骰" }, "flavor": "戒指的另一半在命运女神手中。", "icon": "☯️" },
+
+  "necklace_common_01": { "id": "necklace_common_01", "name": "麻绳项链", "slot": "necklace", "rarity": "common", "price": 120, "bonuses": { "charisma": 1 }, "flavor": "一根麻绳串着一颗光滑的河卵石。", "icon": "📿" },
+  "necklace_uncommon_01": { "id": "necklace_uncommon_01", "name": "琥珀吊坠", "slot": "necklace", "rarity": "uncommon", "price": 550, "bonuses": { "charisma": 2 }, "flavor": "琥珀里封着一片来自远古森林的树叶。", "icon": "🧿" },
+  "necklace_rare_01": { "id": "necklace_rare_01", "name": "人鱼之泪", "slot": "necklace", "rarity": "rare", "price": 2200, "bonuses": { "charisma": 3, "luck": 1 }, "flavor": "一颗永远不会干涸的珍珠，据说能带来好运。", "icon": "🫧" },
+  "necklace_epic_01": { "id": "necklace_epic_01", "name": "龙息护符", "slot": "necklace", "rarity": "epic", "price": 5500, "bonuses": { "charisma": 4, "luck": 2, "goldFind": 5 }, "flavor": "护符中封存着一缕龙息，微微发烫。", "icon": "🐉" },
+  "necklace_legendary_01": { "id": "necklace_legendary_01", "name": "世界树之种", "slot": "necklace", "rarity": "legendary", "price": 14000, "bonuses": { "charisma": 5, "luck": 3, "goldFind": 10 }, "specialEffect": { "type": "extraRoll", "chance": 0.1, "desc": "10%概率额外骰一次" }, "flavor": "它在跳动着，像一颗微小的心脏。", "icon": "🌳" },
+
+  "gauntlets_common_01": { "id": "gauntlets_common_01", "name": "布手套", "slot": "gauntlets", "rarity": "common", "price": 130, "bonuses": { "charisma": 1 }, "flavor": "一双耐磨的粗布手套，冒险者的标配。", "icon": "🧤" },
+  "gauntlets_uncommon_01": { "id": "gauntlets_uncommon_01", "name": "皮革护腕", "slot": "gauntlets", "rarity": "uncommon", "price": 500, "bonuses": { "charisma": 1, "luck": 1 }, "flavor": "护腕上烙着冒险者公会的徽记。", "icon": "🤚" },
+  "gauntlets_rare_01": { "id": "gauntlets_rare_01", "name": "秘银手甲", "slot": "gauntlets", "rarity": "rare", "price": 1900, "bonuses": { "charisma": 2, "luck": 2 }, "flavor": "秘银打造，轻如羽毛却坚如龙鳞。", "icon": "🦾" },
+  "gauntlets_epic_01": { "id": "gauntlets_epic_01", "name": "巨人杀手护手", "slot": "gauntlets", "rarity": "epic", "price": 4800, "bonuses": { "charisma": 3, "luck": 3 }, "flavor": "传说这双手套曾击倒过山岭巨人。", "icon": "👊" },
+  "gauntlets_legendary_01": { "id": "gauntlets_legendary_01", "name": "命运之握", "slot": "gauntlets", "rarity": "legendary", "price": 11000, "bonuses": { "charisma": 4, "luck": 4 }, "specialEffect": { "type": "failShield", "chance": 0.2, "desc": "20%概率免疫失败" }, "flavor": "命运不会从这双手套中溜走。", "icon": "🖐️" },
+
+  "cloak_common_01": { "id": "cloak_common_01", "name": "麻布披风", "slot": "cloak", "rarity": "common", "price": 140, "bonuses": { "luck": 1 }, "flavor": "一件朴素的旅行披风，沾满了路上的尘土。", "icon": "🧣" },
+  "cloak_uncommon_01": { "id": "cloak_uncommon_01", "name": "森林斗篷", "slot": "cloak", "rarity": "uncommon", "price": 550, "bonuses": { "luck": 2 }, "flavor": "精灵织造的斗篷，在林间行走时几乎看不见。", "icon": "🌿" },
+  "cloak_rare_01": { "id": "cloak_rare_01", "name": "暗影披风", "slot": "cloak", "rarity": "rare", "price": 2100, "bonuses": { "luck": 2, "charisma": 2 }, "flavor": "披风边缘似乎在不断融入周围的暗影。", "icon": "🌑" },
+  "cloak_epic_01": { "id": "cloak_epic_01", "name": "凤凰羽披风", "slot": "cloak", "rarity": "epic", "price": 5200, "bonuses": { "luck": 4, "charisma": 2 }, "flavor": "披风上的凤凰羽毛在危难时刻会微微发烫。", "icon": "🔥" },
+  "cloak_legendary_01": { "id": "cloak_legendary_01", "name": "星界旅者之袍", "slot": "cloak", "rarity": "legendary", "price": 13000, "bonuses": { "luck": 5, "charisma": 3 }, "specialEffect": { "type": "goldReroll", "chance": 0.15, "desc": "15%概率金币不满时重骰" }, "flavor": "袍子上绣着星图，但每隔几天，星座的位置就会改变。", "icon": "🌌" },
+
+  "boots_common_01": { "id": "boots_common_01", "name": "皮靴", "slot": "boots", "rarity": "common", "price": 160, "bonuses": { "luck": 1 }, "flavor": "一双结实的旅行皮靴，鞋底已经磨薄了。", "icon": "👢" },
+  "boots_uncommon_01": { "id": "boots_uncommon_01", "name": "旅者之靴", "slot": "boots", "rarity": "uncommon", "price": 600, "bonuses": { "luck": 1, "charisma": 1 }, "flavor": "据说穿着它走过一千里的路也不会累。", "icon": "🥾" },
+  "boots_rare_01": { "id": "boots_rare_01", "name": "疾风靴", "slot": "boots", "rarity": "rare", "price": 2300, "bonuses": { "luck": 3, "charisma": 1 }, "flavor": "鞋底刻着风之符文，每一步都像踩在微风上。", "icon": "💨" },
+  "boots_epic_01": { "id": "boots_epic_01", "name": "踏云靴", "slot": "boots", "rarity": "epic", "price": 5800, "bonuses": { "luck": 3, "charisma": 3 }, "flavor": "据说穿着它走过的地方，花会开得更快。", "icon": "☁️" },
+  "boots_legendary_01": { "id": "boots_legendary_01", "name": "命运行者", "slot": "boots", "rarity": "legendary", "price": 12500, "bonuses": { "luck": 4, "charisma": 4 }, "specialEffect": { "type": "extraRoll", "chance": 0.12, "desc": "12%概率额外骰一次" }, "flavor": "每走一步，命运的骰子就多转一圈。", "icon": "👣" }
+}

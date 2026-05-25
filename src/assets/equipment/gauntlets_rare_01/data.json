@@ -1,0 +1,14 @@
+{
+  "id": "gauntlets_rare_01",
+  "name": "秘银手甲",
+  "slot": "gauntlets",
+  "rarity": "rare",
+  "price": 1900,
+  "bonuses": {
+    "charisma": 2,
+    "luck": 2
+  },
+  "specialEffect": null,
+  "flavor": "秘银打造，轻如羽毛却坚如龙鳞。",
+  "icon": "🦾"
+}

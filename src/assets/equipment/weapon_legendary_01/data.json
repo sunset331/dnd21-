@@ -1,0 +1,18 @@
+{
+  "id": "weapon_legendary_01",
+  "name": "裁决之刃",
+  "slot": "weapon",
+  "rarity": "legendary",
+  "price": 18000,
+  "bonuses": {
+    "charisma": 5,
+    "luck": 4
+  },
+  "specialEffect": {
+    "type": "failShield",
+    "chance": 0.25,
+    "desc": "25%概率免疫大失败"
+  },
+  "flavor": "这把剑只会被真正的英雄举起——或者特别幸运的骗子。",
+  "icon": "🔥"
+}

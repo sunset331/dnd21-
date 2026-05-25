@@ -1,0 +1,18 @@
+{
+  "id": "boots_legendary_01",
+  "name": "命运行者",
+  "slot": "boots",
+  "rarity": "legendary",
+  "price": 12500,
+  "bonuses": {
+    "luck": 4,
+    "charisma": 4
+  },
+  "specialEffect": {
+    "type": "extraRoll",
+    "chance": 0.12,
+    "desc": "12%概率额外骰一次"
+  },
+  "flavor": "每走一步，命运的骰子就多转一圈。",
+  "icon": "👣"
+}

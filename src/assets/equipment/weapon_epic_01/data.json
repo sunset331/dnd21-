@@ -1,0 +1,14 @@
+{
+  "id": "weapon_epic_01",
+  "name": "龙牙长枪",
+  "slot": "weapon",
+  "rarity": "epic",
+  "price": 7000,
+  "bonuses": {
+    "charisma": 3,
+    "luck": 3
+  },
+  "specialEffect": null,
+  "flavor": "用成年红龙的牙齿锻造，枪尖永远温热。",
+  "icon": "🔱"
+}

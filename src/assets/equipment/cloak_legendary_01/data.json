@@ -1,0 +1,18 @@
+{
+  "id": "cloak_legendary_01",
+  "name": "星界旅者之袍",
+  "slot": "cloak",
+  "rarity": "legendary",
+  "price": 13000,
+  "bonuses": {
+    "luck": 5,
+    "charisma": 3
+  },
+  "specialEffect": {
+    "type": "goldReroll",
+    "chance": 0.15,
+    "desc": "15%概率金币不满时重骰"
+  },
+  "flavor": "袍子上绣着星图，但每隔几天，星座的位置就会改变。",
+  "icon": "🌌"
+}

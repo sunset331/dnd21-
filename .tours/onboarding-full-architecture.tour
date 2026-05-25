@@ -1,0 +1,98 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "DND 21面骰子 — 完整架构导览",
+  "description": "从零到一理解这颗有生命的魔法骰子。适合首次接触项目的开发者，覆盖 Electron 主进程、渲染进程模块体系、事件引擎、状态管理和 UI 系统。",
+  "ref": "master",
+  "steps": [
+    {
+      "directory": "/f/projects/dnd-dice-pet",
+      "title": "项目根目录",
+      "description": "零构建工具的 Electron 桌面宠物。14 个渲染进程模块 + 7 个 CSS 文件，纯 HTML/CSS/JS。入口：main.js（Electron 主进程），渲染进程从 src/renderer/index.html 启动。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/main.js",
+      "line": 68,
+      "title": "Electron 主进程 — 透明置顶窗口",
+      "description": "创建 transparent + alwaysOnTop + frameless 窗口（180×390）。使用 -webkit-app-region 处理拖拽，CSS pointer-events 控制点击穿透。系统托盘（Tray）在此初始化，程序化生成 16×16 紫色骰子图标。IPC 通道：settings:get/save/merge、window:set-*、ghost:cursor-near、app:quit。关闭窗口默认隐藏到托盘而非退出。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/preload.js",
+      "title": "安全 IPC 桥接",
+      "description": "通过 contextBridge 暴露最小化 API：设置读写、窗口控制（置顶/透明度/缩放）、幽灵模式光标检测、托盘事件监听。渲染进程只能访问这些方法，不能直接操作 Node.js。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/index.html",
+      "title": "渲染入口 — SVG 水晶骰子",
+      "description": "单页 HTML，包含完整的 SVG 水晶骰子（15+ 多边形面、渐变填充、发光滤镜、金边高光）。UI 元素垂直排列：拖拽把手 → 状态栏 → 阶段指示器 → 事件显示 → 骰子 → 按钮 → 情绪台词。15 个 <script> 标签按依赖顺序加载。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/app.js",
+      "line": 98,
+      "title": "核心协调器 — 三阶段流程",
+      "description": "app.js 是 192 行的轻量协调器。Stage 0（idle）→ 点击「遭遇事件」→ Stage 1（event_ready）→ 点击「投掷命运骰」→ Dice.roll() → Stage 2（result）。handleRollComplete() 编排整个结算流程：圣光庇护重投 → 情绪追踪 → 状态应用 → 历史记录 → 粒子特效 → 弹窗展示 → 成就检测。所有模块在此初始化和连线。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/dice.js",
+      "line": 5,
+      "title": "骰子状态机",
+      "description": "四态状态机：idle → event_ready → rolling → result。每态对应不同 CSS 类（呼吸浮动 / 金色脉动 / 三轴旋转 / 闪光）。roll() 期间 60ms 间隔数字滚动，1.4s 后落地。通过 CSS @keyframes 驱动动画，零 JS 动画循环。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/scenario.js",
+      "line": 1,
+      "title": "模块化事件引擎（核心创新）",
+      "description": "整个项目最复杂的模块（307 行）。五大组件池：36 ACTIONS × 36 LOCATIONS × 35 TARGETS × 25 COMPLICATIONS，通过 weightedPick() 按状态标签加权组合。24 个 OUTCOME_TEMPLATES 是函数工厂，接收事件组件 + 骰子等级，动态生成因果绑定的结局文本。generateEvent() 返回 {text, components, tags, rarity}，generateOutcome() 根据 components 和 tier 调用对应模板。包含链式事件、状态池（6 种状态）、稀有度系统。数据涵盖暗精灵、半兽人、传奇幽灵、天气、阵营、诅咒。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/status.js",
+      "line": 5,
+      "title": "角色状态系统",
+      "description": "管理 gameState.statusEffects[]。tick() 每轮递减 duration 并清理过期状态。add() 防重复（刷新 duration）。maybeApply() 根据骰子等级概率触发（大失败 50% → 诅咒，大成功 15% → 幸运）。render() 生成 status-chip DOM。圣光庇护在 app.js 的 handleRollComplete 中触发重投。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/mood.js",
+      "line": 27,
+      "title": "骰子情绪引擎",
+      "description": "7 种情绪状态（neutral/excited/smug/mocking/angry/bored/sleepy）。computeMood() 根据连续成功/失败次数、空闲时长、深夜时段计算情绪。update() 切换 CSS 类 dice-mood--*（改变辉光颜色和浮动速度）。startIdleTimer() 每 35 秒检查是否该说台词，通过 showQuote() 触发淡入淡出气泡。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/ghost.js",
+      "line": 5,
+      "title": "幽灵模式",
+      "description": "每秒通过 IPC 检查光标是否在窗口 60px 范围内。远离 + 空闲 > 15s → 透明度渐变至 25%。鼠标靠近 → 恢复 100%。使用 lerp 平滑过渡（targetOpacity += (target - current) * 0.3）。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/ui-manager.js",
+      "line": 5,
+      "title": "弹窗单例管理器",
+      "description": "统一管控所有浮层面板（设置、日志、成就）。register() 注册面板 + 强制 style.display='none'。open() 自动关闭已打开面板（单例策略）。全局 ESC 关闭 + 点击外部关闭。所有面板通过 inline style 而非 CSS class 控制显隐，彻底规避 CSS 加载问题。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/achievements.js",
+      "line": 5,
+      "title": "成就系统",
+      "description": "13 个成就，分 common/uncommon/rare 三档稀有度。check() 接收 gameState + tier + statusIds 等参数，遍历 DEFS 检测解锁条件（first_crit_fail、fail_streak_5、crit_streak_3、ten_rolls、drunk_adventure、midnight_roll 等）。解锁时弹出 toast 通知（4 秒后自动消失），通过 settings:merge IPC 原子持久化。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/adventure-log.js",
+      "line": 5,
+      "title": "冒险日志",
+      "description": "完整的日志系统：最多保存 500 条记录，支持关键词搜索，可清空。通过 settings:merge IPC 原子持久化。面板由 UIManager 管理（单例 + ESC 关闭）。每条记录包含时间、事件、骰值、判定等级、结局文本。"
+    },
+    {
+      "directory": "/f/projects/dnd-dice-pet/src/styles",
+      "title": "CSS 架构 — 7 文件分层",
+      "description": "main.css：CSS 变量（暖紫暗黑调色板）+ reset + body 透明。dice.css：水晶骰子面片渐变 + 情绪辉光变量。animations.css：breathe/spin/pulse-ready/result-flash/popup-enter。particles.css：粒子 burst 动画（CSS 变量驱动的 GPU 合成）。popup.css：判定卡片（4 档颜色边框）。ui.css：按钮 3D 立体效果 + 右键菜单 + 阶段指示器。settings.css：设置面板/成就列表/日志面板共享基类。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/src/renderer/audio.js",
+      "title": "过程化音效（零外部文件）",
+      "description": "Web Audio API 合成所有音效。playRollSound()：6 段带通滤波白噪声模拟骰子碰撞。playResultSound()：4 种振荡器音色（锯齿波下行→大失败 / 三角波→失败 / 方波上行→成功 / 大三和弦→大成功）。惰性初始化 AudioContext 以符合浏览器自动播放策略。"
+    },
+    {
+      "file": "/f/projects/dnd-dice-pet/README.md",
+      "title": "终点 — 你现在可以做的事",
+      "description": "你已完整理解这个项目的架构。14 个 JS 模块围绕一个核心设计原则：模块间通过全局 IIFE 对象通信，app.js 是唯一协调器，每个模块只做一件事。要添加新事件元素 → 扩充 scenario.js 的组件池。要增加新情绪 → 修改 mood.js 的 QUOTES 和 computeMood()。要加新成就 → 在 achievements.js 的 DEFS 数组添加条目。项目在 F:/projects/dnd-dice-pet/，GitHub 仓库在 github.com/sunset331/dnd21-。"
+    }
+  ]
+}

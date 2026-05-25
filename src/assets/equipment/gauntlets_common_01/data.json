@@ -1,0 +1,13 @@
+{
+  "id": "gauntlets_common_01",
+  "name": "布手套",
+  "slot": "gauntlets",
+  "rarity": "common",
+  "price": 130,
+  "bonuses": {
+    "charisma": 1
+  },
+  "specialEffect": null,
+  "flavor": "一双耐磨的粗布手套，冒险者的标配。",
+  "icon": "🧤"
+}

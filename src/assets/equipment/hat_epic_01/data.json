@@ -1,0 +1,14 @@
+{
+  "id": "hat_epic_01",
+  "name": "龙眼冠冕",
+  "slot": "hat",
+  "rarity": "epic",
+  "price": 6000,
+  "bonuses": {
+    "charisma": 4,
+    "luck": 2
+  },
+  "specialEffect": null,
+  "flavor": "冠冕上镶嵌的龙眼宝石会随心情变换颜色。",
+  "icon": "💎"
+}

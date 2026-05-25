@@ -1,0 +1,14 @@
+{
+  "id": "weapon_common_01",
+  "name": "短剑",
+  "slot": "weapon",
+  "rarity": "common",
+  "price": 200,
+  "bonuses": {
+    "charisma": 1,
+    "luck": 0
+  },
+  "specialEffect": null,
+  "flavor": "一把朴素的铁剑，剑柄缠着旧布条。",
+  "icon": "🗡️"
+}

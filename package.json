@@ -1,16 +1,21 @@
 {
-  "name": "dnd-dice-pet",
-  "version": "1.1.1",
-  "description": "DND 21-sided dice desktop pet — a floating magical dice companion",
+  "name": "dnd-pet",
+  "version": "1.2.0",
+  "description": "挂机养成 DND 桌宠 — 旅行青蛙 × DND 跑团",
+  "author": "sunset331",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win portable",
-    "build:installer": "electron-builder --win"
+    "dev": "electron . --dev"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.8.1",
+    "electron-packager": "^17.1.2"
   },
   "build": {
-    "appId": "com.dnd.dicepet",
-    "productName": "DND Dice Pet",
+    "appId": "com.dnd.dice-pet",
+    "productName": "DND-Dice-Pet",
     "directories": {
       "output": "dist"
     },
@@ -18,23 +23,12 @@
       "main.js",
       "preload.js",
       "package.json",
-      "src/**/*"
+      "src/**/*",
+      "!src/assets/animations/**/*.png"
     ],
     "win": {
-      "target": [
-        {
-          "target": "portable",
-          "arch": ["x64"]
-        }
-      ],
-      "icon": null
-    },
-    "portable": {
-      "artifactName": "DND-Dice-Pet.exe"
+      "target": "portable",
+      "icon": "src/assets/tray_icon.png"
     }
-  },
-  "devDependencies": {
-    "electron": "^33.0.0",
-    "electron-builder": "^25.0.0"
   }
 }

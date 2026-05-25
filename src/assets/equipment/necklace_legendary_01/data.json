@@ -1,0 +1,19 @@
+{
+  "id": "necklace_legendary_01",
+  "name": "世界树之种",
+  "slot": "necklace",
+  "rarity": "legendary",
+  "price": 14000,
+  "bonuses": {
+    "charisma": 5,
+    "luck": 3,
+    "goldFind": 10
+  },
+  "specialEffect": {
+    "type": "extraRoll",
+    "chance": 0.1,
+    "desc": "10%概率额外骰一次"
+  },
+  "flavor": "它在跳动着，像一颗微小的心脏。",
+  "icon": "🌳"
+}

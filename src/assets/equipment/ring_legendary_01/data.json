@@ -1,0 +1,18 @@
+{
+  "id": "ring_legendary_01",
+  "name": "命运双生戒",
+  "slot": "ring",
+  "rarity": "legendary",
+  "price": 12000,
+  "bonuses": {
+    "luck": 5,
+    "charisma": 3
+  },
+  "specialEffect": {
+    "type": "goldReroll",
+    "chance": 0.2,
+    "desc": "20%概率金币重骰"
+  },
+  "flavor": "戒指的另一半在命运女神手中。",
+  "icon": "☯️"
+}

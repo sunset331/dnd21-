@@ -1,0 +1,18 @@
+{
+  "id": "gauntlets_legendary_01",
+  "name": "命运之握",
+  "slot": "gauntlets",
+  "rarity": "legendary",
+  "price": 11000,
+  "bonuses": {
+    "charisma": 4,
+    "luck": 4
+  },
+  "specialEffect": {
+    "type": "failShield",
+    "chance": 0.2,
+    "desc": "20%概率免疫失败"
+  },
+  "flavor": "命运不会从这双手套中溜走。",
+  "icon": "🖐️"
+}

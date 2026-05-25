@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DND 桌宠</title>
+  <link rel="stylesheet" href="css/pet.css">
+</head>
+<body>
+  <div id="pet-window">
+    <!-- 拖动把手 -->
+    <div id="drag-handle"></div>
+    <!-- 顶部栏 -->
+    <div id="top-bar">
+      <span id="char-name">无名冒险者</span>
+      <span id="char-race">人类</span>
+      <button id="btn-panel" title="打开面板">📋</button>
+    </div>
+
+    <!-- 骰子 + 角色渲染区 -->
+    <div id="pet-area">
+      <div id="dice-d21">
+        <div class="dice-face front"><span>🎲</span></div>
+        <div class="dice-face back"><span>💀</span></div>
+        <div class="dice-face right"><span>⚔️</span></div>
+        <div class="dice-face left"><span>🛡️</span></div>
+        <div class="dice-face top"><span>⭐</span></div>
+        <div class="dice-face bottom"><span>💰</span></div>
+      </div>
+      <canvas id="pet-canvas"></canvas>
+    </div>
+
+    <!-- 进度条 -->
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+      <span id="progress-text">0/300</span>
+    </div>
+
+    <!-- 信息行 -->
+    <div id="info-bar">
+      <span id="gold-display">💰 100</span>
+      <span id="stats-display">✨魅力5 🍀幸运5</span>
+      <span id="ops-count">🖱️ 追踪中...</span>
+    </div>
+
+    <!-- 冒险弹窗 -->
+    <div id="adventure-popup" class="hidden">
+      <div id="popup-card">
+        <p id="popup-line1"></p>
+        <p id="popup-line2"></p>
+        <button id="popup-dismiss">知道了</button>
+      </div>
+    </div>
+
+    <!-- 创建角色 -->
+    <div id="create-overlay" class="hidden">
+      <div id="create-card">
+        <h2>创建冒险者</h2>
+        <div class="create-row">
+          <label>名字</label>
+          <input type="text" id="create-name" placeholder="输入名字..." maxlength="12">
+        </div>
+        <div class="create-row">
+          <label>性别</label>
+          <select id="create-gender"><option value="male">男</option><option value="female">女</option></select>
+        </div>
+        <div class="create-row">
+          <label>种族</label>
+          <div id="race-options">
+            <button class="race-option selected" data-race="human">🧑<br>人类</button>
+            <button class="race-option" data-race="elf">🧝<br>精灵</button>
+            <button class="race-option" data-race="dwarf">⛏️<br>矮人</button>
+            <button class="race-option" data-race="goblin">👺<br>哥布林</button>
+            <button class="race-option" data-race="dragonborn">🐲<br>龙裔</button>
+          </div>
+        </div>
+        <div id="race-info"><span id="race-preview">🧑</span><span id="race-desc"></span></div>
+        <div id="preset-section"><label>预设冒险者</label><div id="preset-list"></div></div>
+        <button id="create-confirm">🎲 出发！</button>
+      </div>
+    </div>
+
+    <!-- 右键菜单 -->
+    <div id="context-menu" class="hidden">
+      <div class="ctx-item" data-action="auto-toggle">
+        <span id="ctx-auto-icon">⏱️</span><span id="ctx-auto-label">自动冒险</span>
+      </div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item" data-action="open-panel"><span>📋</span>冒险者面板</div>
+      <div class="ctx-item" data-action="edit-name"><span>✏️</span>修改名字</div>
+      <div class="ctx-item" data-action="new-character"><span>🆕</span>新建角色（新槽位）</div>
+      <div class="ctx-item" data-action="switch-character"><span>🔄</span>切换角色</div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item" data-action="save-pos"><span>📌</span>记住位置</div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item danger" data-action="delete-character"><span>💀</span>删除角色</div>
+    </div>
+  </div>
+  <script type="module" src="js/pet-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "id": "hat_rare_01",
+  "name": "秘银头环",
+  "slot": "hat",
+  "rarity": "rare",
+  "price": 2000,
+  "bonuses": {
+    "charisma": 3,
+    "luck": 1
+  },
+  "specialEffect": null,
+  "flavor": "秘银的光泽在月光下微微发亮。",
+  "icon": "👑"
+}
