@@ -4,10 +4,22 @@ const path = require('path');
 const fs = require('fs');
 
 let SAVE_PATH, MAX_SLOTS;
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB per save file
 
 function init(savePath, maxSlots = 3) {
   SAVE_PATH = savePath;
   MAX_SLOTS = maxSlots;
+}
+
+function validSlot(n) {
+  return Number.isInteger(n) && n >= 1 && n <= MAX_SLOTS;
+}
+
+function validateSaveData(data) {
+  if (!data || typeof data !== 'object') return false;
+  if (typeof data.version !== 'number') return false;
+  if (!data.character || typeof data.character !== 'object') return false;
+  return true;
 }
 
 function ensureDir() {
@@ -29,14 +41,22 @@ function writeIndex(idx) {
 function registerSaveIPC() {
   ipcMain.handle('save-game', (_, data, slot) => {
     try {
-      ensureDir();
       const n = slot || 1;
+      if (!validSlot(n)) return { success: false, error: 'invalid slot' };
+      if (!validateSaveData(data)) return { success: false, error: 'invalid save data' };
+
+      const json = JSON.stringify(data, null, 2);
+      if (Buffer.byteLength(json, 'utf-8') > MAX_FILE_SIZE) {
+        return { success: false, error: 'save data too large' };
+      }
+
+      ensureDir();
       const sp = slotPath(n);
       if (fs.existsSync(sp)) {
         const bak = slotPath(n) + '.bak';
         fs.copyFileSync(sp, bak);
       }
-      fs.writeFileSync(sp, JSON.stringify(data, null, 2), 'utf-8');
+      fs.writeFileSync(sp, json, 'utf-8');
       const idx = readIndex();
       idx.activeSlot = n;
       idx.slots[n] = { updatedAt: new Date().toISOString(), name: data?.character?.name || '未知' };
@@ -48,7 +68,7 @@ function registerSaveIPC() {
   ipcMain.handle('load-game', (_, slot) => {
     try {
       ensureDir();
-      const n = slot || readIndex().activeSlot || 1;
+      const n = validSlot(slot) ? slot : (readIndex().activeSlot || 1);
       const sp = slotPath(n);
       if (!fs.existsSync(sp)) return { success: false, reason: 'no-save', slot: n };
       const data = JSON.parse(fs.readFileSync(sp, 'utf-8'));
@@ -84,6 +104,7 @@ function registerSaveIPC() {
 
   ipcMain.handle('delete-save', (_, slot) => {
     try {
+      if (!validSlot(slot)) return { success: false, error: 'invalid slot' };
       const sp = slotPath(slot);
       if (fs.existsSync(sp)) fs.unlinkSync(sp);
       const bak = sp + '.bak';
