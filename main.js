@@ -69,9 +69,15 @@ function createWindow() {
   const saved = readSettings();
   const winOpts = (saved && saved.window) || {};
 
+  // DPI-aware base size
+  const dpiScale = screen.getPrimaryDisplay().scaleFactor || 1;
+  const baseW = Math.round(180 * dpiScale);
+  const baseH = Math.round(390 * dpiScale);
+
   win = new BrowserWindow({
-    width: 180,
-    height: 390,
+    width: baseW,
+    height: baseH,
+    useContentSize: true,
     x: winOpts.lastX,
     y: winOpts.lastY,
     transparent: true,
@@ -154,7 +160,8 @@ ipcMain.on('window:set-opacity', (_event, val) => {
 
 ipcMain.on('window:set-scale', (_event, val) => {
   if (win) {
-    win.setSize(Math.round(180 * val), Math.round(390 * val));
+    const s = screen.getPrimaryDisplay().scaleFactor || 1;
+    win.setSize(Math.round(180 * s * val), Math.round(390 * s * val));
   }
 });
 

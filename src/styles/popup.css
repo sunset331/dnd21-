@@ -16,7 +16,10 @@
   border-radius: 12px;
   box-shadow: 0 0 35px rgba(120,80,200,0.3), 0 8px 35px rgba(0,0,0,0.5);
   padding: 18px 22px 16px;
-  max-width: 250px; min-width: 210px;
+  max-width: min(92vw, 280px);
+  min-width: clamp(180px, 28vw, 220px);
+  max-height: 88vh;
+  overflow-y: auto;
   text-align: center; position: relative;
 }
 

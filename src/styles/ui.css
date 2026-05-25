@@ -74,7 +74,8 @@ body {
 /* ─── Event display (subtitle-style) ─── */
 #event-display {
   pointer-events: none; padding: 2px 10px;
-  flex-shrink: 0; max-width: 170px;
+  flex-shrink: 0;
+  max-width: min(92vw, 200px);
   opacity: 1;
   transition: opacity 0.4s ease;
 }
